@@ -1,0 +1,20 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.header-style {
+  background-color: #fff;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1.75rem;
+  border-bottom: 1px solid #ff0000;
+}
+
+p {
+  font-size: 1.25rem;
+}
