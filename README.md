@@ -7,7 +7,7 @@ React
 
 JavaScript
 
-## Run un local
+## Run in local
 
 To see the actual web in local 
 ```
