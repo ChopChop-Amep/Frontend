@@ -1,7 +1,7 @@
 # Frontend
 
 
-Tecnologias:
+## Technologies:
 
 <p align="center">
   <img alt="REACT" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s" width="50" height="50"/>
