@@ -8,7 +8,12 @@ function LogIn() {
     } = useData()
   
     const handleSubmit = () => {
-      alert('Loged In correctly.')
+        event.preventDefault();
+        if (!errorN && !errorS && !errorE && !errorP)
+        {
+            alert('Loged In correctly.')
+            window.location.href = '/'
+        }
     }
     const handleChangeName = (event) => {
       updateName(event.target.value)
@@ -40,7 +45,7 @@ function LogIn() {
                 <input onChange={handleChangePassword} value={password} type="password" placeholder="Password" />
             </div>
             <div>
-                <button type='submit'>Sign In</button>
+                <button type='submit'>Sign Up</button>
             </div>
         </form>
         <div>

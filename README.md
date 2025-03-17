@@ -8,6 +8,13 @@
   <img alt="JS" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" width="50" height="50"/>
 </p>
 
+## Instalations needed
+```
+npm install
+npm install react-router-dom@6
+```
+
+
 ## Run in local
 
 To see the actual web in local 

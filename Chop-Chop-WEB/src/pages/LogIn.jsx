@@ -3,8 +3,12 @@ import {useData} from '../hooks/useDataSignUp.js'
 function SignIn() {
   const {email, updateEmail, errorE, password, updatePassword, errorP} = useData()
 
-  const handleSubmit = () => {
-    alert('Signed In correctly.')
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!errorE && !errorP) {
+      alert('Signed In correctly.');
+      window.location.href = '/';
+    }
   }
   const handleChangeEmail = (event) => {
     updateEmail(event.target.value)
@@ -12,6 +16,7 @@ function SignIn() {
   const handleChangePassword = (event) => { 
     updatePassword(event.target.value)
   }
+
 
   return (
     <main>
@@ -24,7 +29,7 @@ function SignIn() {
                 <input className="inputPassword" onChange={handleChangePassword} value={password} type="password" placeholder="Password" />
             </div>
             <div>
-                <button type='submit'>Sign In</button>
+                <button type='submit'>Log In</button>
             </div>
         </form>
         <div>
