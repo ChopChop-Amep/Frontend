@@ -1,4 +1,5 @@
 import {useData} from '../hooks/useDataLogIn.js'
+import './SignUp.css'
 
 function LogIn() {
     const {name, updateName, errorN,
@@ -44,8 +45,9 @@ function LogIn() {
             <div>
                 <input onChange={handleChangePassword} value={password} type="password" placeholder="Password" />
             </div>
+            <br />
             <div>
-                <button type='submit'>Sign Up</button>
+                <button className='button-style-su' type='submit'>Sign Up</button>
             </div>
         </form>
         <div>
