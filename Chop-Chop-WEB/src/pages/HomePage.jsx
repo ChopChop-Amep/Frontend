@@ -1,7 +1,22 @@
 import React from 'react'
+import './HomePage.css'
+import { useEffect, useState} from 'react'
+import { Box } from './utiles/Box.jsx'
 
+const API_URL = 'https://fakestoreapi.com/products?limit=10';
 
 function HomePage() {
+
+  const [products, setProducts] = useState();
+
+  useEffect(() => {
+    fetch(API_URL)
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
   
   const handleShowLogin = () => {
     window.location.href = '/login';
@@ -15,11 +30,15 @@ function HomePage() {
     <>
       <header className='header-style'>
         <input style={{ color: '#000000', position: 'fixed', top: '17px', left: '10px' }} placeholder='Search'/>
-        <button onClick={handleShowLogin} style={{ position: 'fixed', top: '17px', right: '10px' }}>Login</button>
-        <button onClick={handleShowSignup} style={{ position: 'fixed', top: '17px', right: '60px' }}>Sign Up</button>
+        <button onClick={handleShowLogin} className='button-style-hp' style={{ position: 'fixed', top: '17px', right: '10px' }}>Log In</button>
+        <button onClick={handleShowSignup} className='button-style-hp' style={{ position: 'fixed', top: '17px', right: '100px' }}>Sign Up</button>
       </header>
 
-      <h1>Chop-Chop</h1>
+      <main style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {products && products.map((product) => (
+          <Box key={product.id} title={product.title} image={product.image} style={{ flex: '1 0 14%' }} />
+        ))}
+      </main>
     </>
   )
 }
