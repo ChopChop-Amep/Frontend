@@ -22,7 +22,8 @@ To see the actual web in local
 npm run dev
 ```
 
+## APIs
 
-APIs for firsts tests and pseude-real data: 
+API for firsts tests and pseudo-real data: 
 
 [Fake-Store-API](https://github.com/keikaavousi/fake-store-api)
