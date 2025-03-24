@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 import './SignUp.css';
 
 // Initialize Supabase client
-const supabaseUrl = process.env.REACT_APP_SUPABASE_URL; 
-const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY; 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL; 
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 function SignUp() {
@@ -60,44 +60,34 @@ function SignUp() {
     <main>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <div>
           <input
             onChange={(e) => setName(e.target.value)}
             value={name}
             type="text"
             placeholder="Name"
           />
-        </div>
-        <div>
           <input
             onChange={(e) => setSurname(e.target.value)}
             value={surname}
             type="text"
             placeholder="Surname"
           />
-        </div>
-        <div>
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
             placeholder="Email"
           />
-        </div>
-        <div>
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
             placeholder="Password"
           />
-        </div>
         <br />
-        <div>
           <button className="button-style-su" type="submit">
             Sign Up
           </button>
-        </div>
       </form>
       <div>{errorN && <p style={{ margin: '1rem', color: 'red' }}>{errorN}</p>}</div>
       <div>{errorS && <p style={{ margin: '1rem', color: 'red' }}>{errorS}</p>}</div>
