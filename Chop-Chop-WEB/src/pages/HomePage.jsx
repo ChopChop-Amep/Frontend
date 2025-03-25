@@ -91,15 +91,15 @@ function HomePage() {
               zIndex: 1000
             }}
           >
-            <a href="#" onClick={handleShowLogin} style={{ color: '#000', display: 'block', padding: '5px' }}>
+            <a href="/login" onClick={handleShowLogin} style={{ color: '#000', display: 'block', padding: '5px' }}>
               Log In
             </a>
             <br />
-            <a href="#" onClick={handleShowSignup} style={{ color: '#000', display: 'block', padding: '5px' }}>
+            <a href="/signup" onClick={handleShowSignup} style={{ color: '#000', display: 'block', padding: '5px' }}>
               Sign Up
             </a>
             <br />
-            <a href="#" onClick={handleShowLogOut} style={{ color: '#000', display: 'block', padding: '5px' }}>
+            <a href="/" onClick={handleShowLogOut} style={{ color: '#000', display: 'block', padding: '5px' }}>
               Log Out
             </a>
           </div>
@@ -111,7 +111,7 @@ function HomePage() {
       <main style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {products && products.map((product) => (
           <a href="/product">
-            <Box key={product.id} title={product.title} image={product.image} style={{ flex: '1 0 14%' }} />
+            <Box key={product.id} title={product.title} image={product.image} />
           </a>
         ))}
       </main>

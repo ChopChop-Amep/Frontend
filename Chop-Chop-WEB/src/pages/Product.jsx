@@ -23,9 +23,8 @@ function StarRating({ rating }) {
 }
 
 
-function productPage() {
+function ProductPage() {
   const [products, setProducts] = useState([]);
-  const [rating, setRating] = useState(0);  // Estado para el rating
 
   useEffect(() => {
     fetch(API_URL)
@@ -70,16 +69,16 @@ function productPage() {
       <br />
 
       <main
-   style={{
-    display: 'flex',
-    justifyContent: 'flex-start', // Mueve el contenido hacia la izquierda
-    alignItems: 'center',
-    width: '75vw',
-    minHeight: '100vh',
-    paddingLeft: '0vw', // Agrega un margen desde la izquierda
-    boxSizing: 'border-box',
-  }}
->
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-start', // Mueve el contenido hacia la izquierda
+          alignItems: 'center',
+          width: '75vw',
+          minHeight: '100vh',
+          paddingLeft: '0vw', // Agrega un margen desde la izquierda
+          boxSizing: 'border-box',
+        }}
+      >
   {products.map((product) => (
     <div
       key={product.id}
@@ -167,4 +166,4 @@ function productPage() {
   );
 }
 
-export default productPage;
+export default ProductPage;
