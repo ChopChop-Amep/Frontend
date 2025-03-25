@@ -21,13 +21,11 @@ function HomePage() {
   return (
     <>
       <HeaderMenu />
-      
-      <br />
 
-      <main style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
         {products && products.map((product) => (
-          <a href="/product">
-            <Box key={product.id} title={product.title} image={product.image} />
+          <a href="/product" key={product.id}>
+            <Box title={product.title} image={product.image} />
           </a>
         ))}
       </main>
