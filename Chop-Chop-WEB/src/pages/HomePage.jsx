@@ -110,7 +110,9 @@ function HomePage() {
 
       <main style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {products && products.map((product) => (
-          <Box key={product.id} title={product.title} image={product.image} style={{ flex: '1 0 14%' }} />
+          <a href="/product">
+            <Box key={product.id} title={product.title} image={product.image} style={{ flex: '1 0 14%' }} />
+          </a>
         ))}
       </main>
     </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './product.css';
+//import './product.css';
 import { Box } from './utiles/Box.jsx';
 
 const API_URL = 'https://fakestoreapi.com/products?limit=1';
