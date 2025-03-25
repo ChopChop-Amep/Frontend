@@ -1,69 +1,42 @@
-import {useData} from '../hooks/useDataLogIn.js'
+import {useData} from '../hooks/useDataSignUp.js'
 import './SignUp.css'
 
-function LogIn() {
-    const {name, updateName, errorN,
-        surname, updateSurname, errorS,
-        email, updateEmail, errorE,
-        password, updatePassword, errorP
-    } = useData()
-  
-    const handleSubmit = () => {
-        event.preventDefault();
-        if (!errorN && !errorS && !errorE && !errorP)
-        {
-            alert('Loged In correctly.')
-            window.location.href = '/'
-        }
-    }
-    const handleChangeName = (event) => {
-      updateName(event.target.value)
-    }
-    const handleChangeSurname = (event) => {
-        updateSurname(event.target.value)
-    }
-    const handleChangeEmail = (event) => {
-      updateEmail(event.target.value)
-    }
-    const handleChangePassword = (event) => { 
-      updatePassword(event.target.value)
-    }
+function SignIn() {
+  const {email, updateEmail, errorE, password, updatePassword, errorP} = useData()
+
+  const handleSubmit = () => {
+    alert('Signed In correctly.')
+  }
+  const handleChangeEmail = (event) => {
+    updateEmail(event.target.value)
+  }
+  const handleChangePassword = (event) => { 
+    updatePassword(event.target.value)
+  }
 
   return (
     <main>
-        <h1>Sign Up</h1>
+        <h1>Sing In</h1>
         <form onSubmit={handleSubmit}>
             <div>
-                <input onChange={handleChangeName} value={name} type="text" placeholder="Name" />
+                <input className="inputEmail" onChange={handleChangeEmail} value={email} type="text" placeholder="Email" />
             </div>
             <div>
-                <input onChange={handleChangeSurname} value={surname} type="text" placeholder="Surname" />
+                <input className="inputPassword" onChange={handleChangePassword} value={password} type="password" placeholder="Password" />
             </div>
             <div>
-                <input onChange={handleChangeEmail} value={email} type="text" placeholder="Email" />
-            </div>
-            <div>
-                <input onChange={handleChangePassword} value={password} type="password" placeholder="Password" />
-            </div>
-            <br />
-            <div>
-                <button className='button-style-su' type='submit'>Sign Up</button>
+                <button type='submit'>Sign In</button>
             </div>
         </form>
         <div>
-            {errorN && <p style={{margin: '1rem', color: 'red'}}>{errorN}</p>}
+          {errorE && <p style={{margin: '1rem', color: 'red'}}>{errorE}</p>}
         </div>
         <div>
-            {errorS && <p style={{margin: '1rem', color: 'red'}}>{errorS}</p>}
+          {errorP && <p style={{margin: '1rem', color: 'red'}}>{errorP}</p>}
         </div>
-        <div>
-            {errorE && <p style={{margin: '1rem', color: 'red'}}>{errorE}</p>}
-        </div>
-        <div>
-            {errorP && <p style={{margin: '1rem', color: 'red'}}>{errorP}</p>}
-        </div>
+        
     </main>
   )
 }
 
-export default LogIn
+export default SignIn
