@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './product.css';
-import { Box } from './utiles/Box.jsx';
+import { HeaderMenu } from './components/HeaderMenu.jsx'
 
 const API_URL = 'https://fakestoreapi.com/products?limit=1';
 
@@ -35,36 +35,13 @@ function ProductPage() {
       });
   }, []);
 
-  const handleShowLogin = () => {
-    window.location.href = '/login';
-  };
-
-  const handleShowSignup = () => {
-    window.location.href = '/signup';
-  };
+  const handleBuyNow = () => {
+    alert('Product bought successfully!');
+  }
 
   return (
     <>
-      <header className="header-style">
-        <input
-          style={{ backgroundColor: '#fff', color: '#000', position: 'fixed', top: '17px', left: '10px' }}
-          placeholder="Search"
-        />
-        <button
-          onClick={handleShowLogin}
-          className="button-style-hp"
-          style={{ position: 'fixed', top: '17px', right: '10px' }}
-        >
-          Log In
-        </button>
-        <button
-          onClick={handleShowSignup}
-          className="button-style-hp"
-          style={{ position: 'fixed', top: '17px', right: '100px' }}
-        >
-          Sign Up
-        </button>
-      </header>
+      <HeaderMenu />
 
       <br />
 
@@ -90,7 +67,7 @@ function ProductPage() {
             <StarRating rating={product.rating?.rate || 0} />
           </div>
           <br />
-          <button onClick={handleShowSignup} className="button-style-hp">
+          <button onClick={handleBuyNow} className="button-style-hp">
             Buy Now
           </button>
         </div>
