@@ -47,6 +47,19 @@ export function HeaderMenu() {
   return (
     <header className='header-style'>
         <input style={{backgroundColor: '#fff', color: '#000', position: 'fixed', top: '17px', left: '10px' }} placeholder='Search'/>
+
+        <img src='../../public/logo_processed.png' 
+          style={{ 
+            maxWidth: '40px',  
+            cursor: 'pointer',
+            borderRadius: '10%',
+            position: 'fixed',
+            top: '10px',
+          }}
+          onClick={() => {
+            window.location.href = '/';
+          }}/>
+
         <img
             src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
             alt="Imatge User"

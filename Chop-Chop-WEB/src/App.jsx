@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.jsx'
 import Login from './pages/LogIn.jsx'
 import Signup from './pages/SignUp.jsx'
 import ProductPage from './pages/Product.jsx'
+import CreateProduct from './pages/CreateProduct.jsx'
 
 function App() {
 
@@ -16,6 +17,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/create-product" element={<CreateProduct />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </Router>
   )
