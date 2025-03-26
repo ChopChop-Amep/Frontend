@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Box } from './utiles/Box.jsx'
 import { HeaderMenu } from './components/HeaderMenu.jsx'
 
-const API_URL = 'https://fakestoreapi.com/products?limit=10';
+const API_URL = 'https://fakestoreapi.com/products?limit=15';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -21,7 +21,7 @@ function HomePage() {
   return (
     <>
       <HeaderMenu />
-
+      <br />
       <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
         {products && products.map((product) => (
           <a href="/product" key={product.id}>
