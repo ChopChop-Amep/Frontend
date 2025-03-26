@@ -1,0 +1,16 @@
+.button-style-cp {
+    background-color: #000;
+    border: #fff solid 2px;
+    border-radius: 0.25rem;;
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button-style-cp:hover {
+    background-color: #fff;
+    color: black;
+    transform: scale(1.3);
+}
