@@ -49,9 +49,22 @@ export function HeaderMenu() {
       };
     }, []);
 
+  const handleSearch = (event) => {
+    if (event.key === 'Enter') {
+      const query = event.target.value.trim();
+      if (query) {
+        window.location.href = `/search/${encodeURIComponent(query)}`;
+      }
+    }
+  };
+
   return (
     <header className='header-style'>
-      <input style={{backgroundColor: '#fff', color: '#000', position: 'fixed', top: '17px', left: '10px' }} placeholder='Search'/>
+      <input
+        style={{ backgroundColor: '#fff', color: '#000', position: 'fixed', top: '17px', left: '10px' }}
+        placeholder='Search'
+        onKeyDown={handleSearch}
+      />
 
       <img src='../../public/logo_processed.png' 
         style={{ 
