@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './product.css';
+import './Product.css';
 import { HeaderMenu } from './components/HeaderMenu.jsx'
 
 const API_URL = 'https://fakestoreapi.com/products?limit=1';
