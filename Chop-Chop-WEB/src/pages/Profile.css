@@ -1,0 +1,67 @@
+.image1 {
+    cursor: pointer;
+    border-radius: 50%;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+  }
+  
+  .image2 {
+    cursor: pointer;
+    border-radius: 0%;
+    position: fixed;
+    top: 120px;
+    left: 980px;
+  }
+
+  .image3 { 
+    cursor: pointer;
+    border-radius: 0%;
+    position: fixed;
+    top: 415px;
+    left: 330px;
+  }
+  .nom-usuari-empresa, .nom-username, .nom-info, .nom-location, .Productes, .num-products{
+    font-family: 'Arial', sans-serif; 
+    color: #999999;
+    margin: 10px;
+    position: absolute;
+  }
+
+  .nom-usuari-empresa {
+    font-size: 50px;
+    top: 100px;
+    left: 400px;
+  }
+
+  .nom-username{
+    font-size: 20px;
+    top: 200px;
+    left: 400px;
+  }
+
+  .nom-info{
+    font-size: 20px;
+    top: 280px;
+    left: 400px;
+  }
+
+  .nom-location{
+    font-size: 20px;
+    top: 240px;
+    left: 400px;
+  }
+
+  .Productes{
+    font-size: 40px; 
+    top: 400px;
+    left: 100px;
+  }
+
+  .num-products{
+    font-size: 20px; 
+    top: 320px;
+    left: 400px;
+  }
+
+
