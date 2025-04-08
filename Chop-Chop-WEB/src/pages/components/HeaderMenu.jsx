@@ -6,6 +6,36 @@ export function HeaderMenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario está logueado
   const dropdownRef = useRef(null);
+  const [decodedToken, setDecodedToken] = useState({}); // Estado para almacenar el token decodificado
+
+  // Desencriptar el token para ver la información que contiene
+  const decodeToken = (token) => {
+    try {
+      const base64Url = token.split('.')[1]; // Obtener la parte del payload
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload); // Retornar el payload como un objeto
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const decoded = decodeToken(token);
+      if (decoded) {
+        setDecodedToken(decoded); 
+      }
+    }
+  }, []);
+
 
   useEffect(() => {
     // Verificar si el usuario está logueado al cargar el componente
@@ -77,7 +107,9 @@ export function HeaderMenu() {
           window.location.href = '/';
         }}
       />
-
+      {isLoggedIn && (
+        <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
+      )}
       <img
         src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
         alt="Imatge User"
@@ -104,17 +136,13 @@ export function HeaderMenu() {
               <a href="/signup" onClick={handleShowSignup} className='dropdown-content'>
                 Sign Up
               </a>
-              <br />
-              <a href="/create-product" onClick={handleShowCreateProduct} className='dropdown-content'>
-                Add Product
-              </a>
-              <br />
-              <a href="/" onClick={handleShowLogOut} className='dropdown-content'>
-                Log Out
-              </a>
             </>
           ) : (
             <>
+              <a href="/profile" className='dropdown-content'>
+                Profile
+              </a>
+              <br />
               <a href="/create-product" onClick={handleShowCreateProduct} className='dropdown-content'>
                 Add Product
               </a>
