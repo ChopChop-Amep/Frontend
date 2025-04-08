@@ -7,6 +7,14 @@ export function HeaderMenu() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario está logueado
   const dropdownRef = useRef(null);
 
+  useEffect(() => {
+    // Verificar si el usuario está logueado al cargar el componente
+    const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const DropDown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -27,6 +35,7 @@ export function HeaderMenu() {
     if (window.confirm('Are you sure you want to log out?')) {
       alert('You have logged out successfully!');
       setIsLoggedIn(false); // Cambiar el estado a no logueado
+      localStorage.removeItem('authToken'); // Eliminar el token de autenticación
       window.location.href = '/';
     }
   };
@@ -56,21 +65,14 @@ export function HeaderMenu() {
 
   return (
     <header className='header-style'>
-      <input
-        style={{ backgroundColor: '#fff', color: '#000', position: 'fixed', top: '17px', left: '10px' }}
+      <input className='search-bar'
         placeholder='Search'
         onKeyDown={handleSearch}
       />
 
       <img
+        className='logo'
         src='../../public/logo_processed.png'
-        style={{
-          maxWidth: '40px',
-          cursor: 'pointer',
-          borderRadius: '10%',
-          position: 'fixed',
-          top: '10px',
-        }}
         onClick={() => {
           window.location.href = '/';
         }}
@@ -81,13 +83,7 @@ export function HeaderMenu() {
         alt="Imatge User"
         width="40"
         height="40"
-        style={{
-          cursor: 'pointer',
-          borderRadius: '50%',
-          position: 'fixed',
-          top: '10px',
-          right: '10px',
-        }}
+        className='img-user'
         onClick={(e) => {
           e.stopPropagation();
           DropDown();
@@ -97,43 +93,33 @@ export function HeaderMenu() {
       {isDropdownOpen && (
         <div
           ref={dropdownRef}
-          style={{
-            position: 'fixed',
-            top: '55px',
-            right: '10px',
-            background: 'white',
-            border: '1px solid black',
-            padding: '10px',
-            borderRadius: '5px',
-            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-            zIndex: 1000,
-          }}
+          className='dropdown-menu'
         >
           {!isLoggedIn ? (
             <>
-              <a href="/login" onClick={handleShowLogin} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              <a href="/login" onClick={handleShowLogin} className='dropdown-content'>
                 Log In
               </a>
               <br />
-              <a href="/signup" onClick={handleShowSignup} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              <a href="/signup" onClick={handleShowSignup} className='dropdown-content'>
                 Sign Up
               </a>
               <br />
-              <a href="/create-product" onClick={handleShowCreateProduct} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              <a href="/create-product" onClick={handleShowCreateProduct} className='dropdown-content'>
                 Add Product
               </a>
               <br />
-              <a href="/" onClick={handleShowLogOut} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              <a href="/" onClick={handleShowLogOut} className='dropdown-content'>
                 Log Out
               </a>
             </>
           ) : (
             <>
-              <a href="/create-product" onClick={handleShowCreateProduct} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              <a href="/create-product" onClick={handleShowCreateProduct} className='dropdown-content'>
                 Add Product
               </a>
               <br />
-              <a href="/" onClick={handleShowLogOut} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              <a href="/" onClick={handleShowLogOut} className='dropdown-content'>
                 Log Out
               </a>
             </>

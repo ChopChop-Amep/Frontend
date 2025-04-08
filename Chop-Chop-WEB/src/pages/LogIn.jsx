@@ -22,6 +22,12 @@ function SignIn() {
         if (error) {
           setLoginError('Invalid email or password.');
         } else {
+            const { data } = await supabase.auth.getSession();
+            if (data?.session?.access_token) {
+            localStorage.setItem('authToken', data.session.access_token);
+            } else {
+            setLoginError('Failed to retrieve authentication token.');
+            }
           alert('Signed In correctly.');
           window.location.href = '/';
         }
