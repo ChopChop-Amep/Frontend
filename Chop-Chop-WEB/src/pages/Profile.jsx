@@ -66,6 +66,18 @@ function UserProfile() {
         <p className='num-products'>
           0 products
         </p>
+        <div className="container">
+          <img 
+            src="https://cdn-icons-png.flaticon.com/512/8212/8212741.png"
+            alt="imatge plus"
+            className="image4"
+            width="50"
+            height="50"
+          />
+          <p className="no-products">
+            Add products
+          </p>
+        </div>
 
         {isModalOpen && <EditProfileModal Close={handleCloseModal}/>}
         </> 

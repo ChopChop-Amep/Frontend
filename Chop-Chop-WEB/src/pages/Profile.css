@@ -21,7 +21,14 @@
     top: 415px;
     left: 330px;
   }
-  .nom-usuari-empresa, .nom-username, .nom-info, .nom-location, .Productes, .num-products{
+  .image4{
+    cursor: pointer;
+    border-radius: 0%;
+    position: fixed;
+    justify-content: center; /* Centra horitzontalment */
+    align-items: center;    top: 550px;
+  }
+  .nom-usuari-empresa, .nom-username, .nom-info, .nom-location, .Productes, .num-products, .no-products{
     font-family: 'Arial', sans-serif; 
     color: #999999;
     margin: 10px;
@@ -64,4 +71,22 @@
     left: 400px;
   }
 
-
+  .container {
+    display: flex;
+    flex-direction: column; /* Alinea verticalment */
+    align-items: center; /* Centra horitzontalment */
+    position: absolute; /* Utilitza 'absolute' per posicionar el contenidor */
+    top: 60%; /* Ajusta aquest valor segons sigui necessari */
+    left: 50%;
+  }
+  
+  .image4 {
+    cursor: pointer;
+    border-radius: 0%;
+  }
+  
+  .no-products { /*text add products*/ 
+    font-size: 20px;
+    margin-top: 40px; /* Espai entre la imatge i el text */
+  }
+  
