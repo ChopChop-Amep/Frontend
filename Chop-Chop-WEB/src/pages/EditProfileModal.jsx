@@ -5,21 +5,23 @@ function EditProfileModal ({Close}) {
     return (
         <div className = "modal-overlay"> 
             <div className="modal-content"> 
-                <h2> Edit your profile</h2>
+                <h1> Edit your profile </h1>
                 <form>
-                    <label className='header'>
+                    <p className='header'>
                         Name/Brand Name: 
-                        <input type="text" name = "name" />
-                    </label>
+                    </p>
+                    <input type="text" name = "name" />
                     <br /> 
-                    <label>
-                        email:
-                        <input type = "email" name = "email" /> 
-                    </label>
+                    <p className='header'>
+                        Email:
+                    </p>
+                    <input type = "email" name = "email" /> 
                     <br /> 
-                   
-                    <button type = "button" onClick={Close}> Close</button>
-                    <button type = "submit"> Save </button>
+                    <br /> 
+                    <button className='button-style-ep' type = "button" onClick={Close}> Close</button>
+                    <br />
+                    <br />
+                    <button className='button-style-ep' type = "submit"> Save </button>
                 </form>
             </div>
         </div>

@@ -36,15 +36,14 @@ export function HeaderMenu() {
     }
   }, []);
 
-//   user_metadata: 
-//   email: "pablotutormoegle@gmail.com"
-// email_verified: true
-// name: "Pablo"
-// phone_verified: false
-// sub: "62f1d4f1-794a-4919-942a-acddc01d5e7d"
-// surname: "Tutor"
-// type: "profesional"
-
+// user_metadata: 
+//  email: "pablotutormoegle@gmail.com"
+//  email_verified: true
+//  name: "Pablo"
+//  phone_verified: false
+//  sub: "62f1d4f1-794a-4919-942a-acddc01d5e7d"
+//  surname: "Tutor"
+//  type: "profesional"
 
   useEffect(() => {
     // Verificar si el usuario está logueado al cargar el componente
