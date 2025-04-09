@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './EditProfileModal.css'
 
 function EditProfileModal ({Close}) {
@@ -25,4 +25,4 @@ function EditProfileModal ({Close}) {
         </div>
     );
 }
-export default EditProfileModal; 
+export default EditProfileModal
