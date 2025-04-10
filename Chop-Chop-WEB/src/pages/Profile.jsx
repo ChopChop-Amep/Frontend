@@ -29,7 +29,6 @@ function UserProfile() {
       const decoded = decodeToken(token);
       if (decoded) {
         setDecodedToken(decoded); 
-        console.log(decoded); // Ver el token decodificado en la consola
       }
     }
   }, []);
@@ -75,11 +74,11 @@ function UserProfile() {
           onClick={handleEditProduct}
         /> 
         <p className='nom-usuari-empresa'>
-          {decodedToken.user_metadata.name} {decodedToken.user_metadata.surname}
+          {decodedToken.user_metadata?.name || ''} {decodedToken.user_metadata?.surname || ''}
         </p> 
         <p className='nom-username'>
-          @{decodedToken.user_metadata.name}{decodedToken.user_metadata.surname} · {decodedToken.user_metadata.type}
-        </p> 
+          @{decodedToken.user_metadata?.name || ''}{decodedToken.user_metadata?.surname || ''} · {decodedToken.user_metadata?.type || ''}
+        </p>
         <p className='nom-info'>
           Descripció/Categories/Filtres
         </p> 
