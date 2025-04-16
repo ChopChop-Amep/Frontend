@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   padding: 1.75rem;
-  border-bottom: 1px solid #ff0000;
+  border-bottom: 1px solid #000;
 }
 
 .a-header {
@@ -60,4 +60,17 @@
 
 .dropdown-content:hover {
   background-color: #f1f1f1;
+}
+
+.select-header {
+  background-color: #fff;
+  color: #000;
+  position: fixed;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold; 
+  padding: 10px;
+  border-radius: 5px;
+  top: 7px;
+  left: 450px;
 }
