@@ -115,7 +115,8 @@ export function HeaderMenu() {
         onClick={() => {
           window.location.href = '/';
         }}
-      />
+      />      
+
       {isLoggedIn && (
         <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
       )}
