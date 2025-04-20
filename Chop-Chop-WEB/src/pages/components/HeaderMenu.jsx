@@ -114,10 +114,18 @@ export function HeaderMenu() {
         src='../../public/logo_processed.png'
         onClick={() => {
             window.location.href = '/';
-          }}
-          />
+            }}
+            />
 
-          <select className="select-header" placeholder="Category">
+            <select
+            className="select-header"
+            onChange={(e) => {
+              const selectedCategory = e.target.value;
+              if (selectedCategory !== "all") {
+              window.location.href = `/search?query=${encodeURIComponent(selectedCategory)}`;
+              }
+            }}
+            >
             <option value="all">Category</option>
             <option value="artesanal">Artesanal</option>
             <option value="antiguitats">Antiguitats</option>
@@ -141,19 +149,18 @@ export function HeaderMenu() {
             <option value="sabates">Sabates</option>
             <option value="vehicles">Vehicles</option>
             <option value="videojocs">Videojocs</option>
-            <option value="altres">Altres</option>
-          </select>
+            </select>
 
-          {isLoggedIn && (
-          <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
-          )}
-          <img
-          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-          alt="Imatge User"
-          width="40"
-          height="40"
-          className='img-user'
-          onClick={(e) => {
+            {isLoggedIn && (
+            <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
+            )}
+            <img
+            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            alt="Imatge User"
+            width="40"
+            height="40"
+            className='img-user'
+            onClick={(e) => {
           e.stopPropagation();
           DropDown();
         }}

@@ -1,6 +1,7 @@
 import './App.css'
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
 import HomePage from './pages/HomePage.jsx'
 import Login from './pages/LogIn.jsx'
 import Signup from './pages/SignUp.jsx'
@@ -8,7 +9,7 @@ import ProductPage from './pages/Product.jsx'
 import CreateProduct from './pages/CreateProduct.jsx'
 import SearchPage from './pages/SearchPage.jsx'
 import EditProfileModal from './pages/EditProfileModal.jsx'
-import UserProfile from './pages/Profile.jsx' // Importar el componente UserProfile
+import UserProfile from './pages/Profile.jsx'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/create-product" element={<CreateProduct />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search?query=:query" element={<SearchPage />} />

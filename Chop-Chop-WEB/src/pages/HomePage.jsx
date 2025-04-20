@@ -24,7 +24,7 @@ function HomePage() {
       <br />
       <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
         {products && products.map((product) => (
-          <a href="/product" key={product.id}>
+          <a href={`/product/${product.id}`} key={product.id}>
             <Box title={product.title} image={product.image} />
           </a>
         ))}

@@ -3,7 +3,6 @@ import './Product.css';
 import { HeaderMenu } from './components/HeaderMenu.jsx'
 import './components/BuyButton.css'
 
-const API_URL = 'https://fakestoreapi.com/products?limit=1';
 
 function StarRating({ rating }) {
   return (
@@ -23,6 +22,7 @@ function StarRating({ rating }) {
   );
 }
 
+const API_URL = `https://fakestoreapi.com/products/${window.location.pathname.split('/').pop()}`;
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
