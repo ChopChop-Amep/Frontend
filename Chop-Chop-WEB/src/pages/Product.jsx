@@ -37,7 +37,7 @@ function ProductPage() {
       .catch(error => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [API_URL]);
 
   const handleBuyNow = (price) => {
     alert(`You have purchased this product for $${price.toFixed(2)}`);
