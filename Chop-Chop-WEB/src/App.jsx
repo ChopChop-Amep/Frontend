@@ -21,11 +21,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/product" element={<ProductPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/product?id=:id" element={<ProductPage />} />
         <Route path="/create-product" element={<CreateProduct />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search?query=:query" element={<SearchPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
