@@ -40,7 +40,7 @@ function UserProfile() {
     setIsModalOpen(false);
   };
   const handleEditProduct = () => {
-    window.location.href = '/OwnedProducts';
+    window.location.href = '/ownedProducts';
   };
   const handleAddProduct = () => {
     window.location.href = '/create-product';
