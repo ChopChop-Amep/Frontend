@@ -32,7 +32,6 @@ export function HeaderMenu() {
       const decoded = decodeToken(token);
       if (decoded) {
         setDecodedToken(decoded); 
-        console.log(decoded); // Ver el token decodificado en la consola
       }
     }
   }, []);

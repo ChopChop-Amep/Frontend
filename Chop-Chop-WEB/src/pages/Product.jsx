@@ -3,7 +3,6 @@ import './Product.css';
 import { HeaderMenu } from './components/HeaderMenu.jsx'
 import './components/BuyButton.css'
 
-
 function StarRating({ rating }) {
   return (
     <div className="star-rating">
@@ -22,20 +21,23 @@ function StarRating({ rating }) {
   );
 }
 
-const API_URL = `https://fakestoreapi.com/products/${window.location.pathname.split('/').pop()}`;
-
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [price , setPrice] = useState(0);
 
+  const productId = new URLSearchParams(window.location.search).get("id");
+  const API_URL = `https://fakestoreapi.com/products/${productId}`;
+
   useEffect(() => {
     fetch(API_URL)
       .then(response => response.json())
-      .then(data => setProducts(data))
+      .then(data => {
+        setProducts(Array.isArray(data) ? data : [data]); // Asegúrate de que siempre sea un array
+      })
       .catch(error => {
         console.error('Error:', error);
       });
-  }, []);
+  }, [API_URL]);
 
   const handleBuyNow = (price) => {
     alert(`You have purchased this product for $${price.toFixed(2)}`);
