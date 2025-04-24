@@ -8,7 +8,7 @@ const API_URL = 'https://fakestoreapi.com/products?limit=15'
 
 function HomePage() {
   const [products, setProducts] = useState([]);
-
+  
   useEffect(() => {
     fetch(API_URL)
       .then(response => response.json())

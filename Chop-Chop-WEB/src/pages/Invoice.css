@@ -1,0 +1,70 @@
+.FACTURA {
+    font-family: 'Arial', sans-serif; 
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    position: absolute;
+    top: 80px;
+    right: 500px;
+}
+.invoice_data, .invoice_db, .seller, .buyer {
+    font-family: 'Arial', sans-serif; 
+    color: #fff;
+    font-size: 20px;
+    position: absolute;   
+}
+.invoice_data{
+    top: 220px;
+    right: 700px; 
+    text-align: right;
+}
+.invoice_db {
+    top: 220px;
+    right: 500px; 
+    text-align: right;
+
+} 
+
+.seller {
+    top: 220px; 
+    left: 500px; 
+    text-align: left;
+}
+
+.buyer {
+    top: 380px; 
+    left: 500px; 
+    text-align: left;
+}
+
+.invoice-table {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: grid;  
+    position: absolute;    /* permet controlar la posició amb top i left/right */
+    top: 550px;            /* distància des de dalt */
+    left: 50%;             /* mou el contingut al centre (referència: el 50% de l'amplada de la pàgina) */
+    transform: translateX(-50%); /* ajusta el desplaçament per realment centrar-ho */
+  }
+  
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
+    column-gap: 170px;
+  }
+  
+  .row.header {
+    font-weight: bold;
+    color: #fff;
+  }
+
+.total-row {
+    font-weight: bold;
+    border-top: 2px solid #fff;
+    margin-top: 10px;
+  }
+  
+  
+

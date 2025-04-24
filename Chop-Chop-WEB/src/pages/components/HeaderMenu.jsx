@@ -154,7 +154,7 @@ export function HeaderMenu() {
             <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
             )}
             <img
-            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            src={(decodedToken.user_metadata?.image) || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
             alt="Imatge User"
             width="40"
             height="40"
@@ -186,8 +186,16 @@ export function HeaderMenu() {
                 Profile
               </a>
               <br />
+              <a href="/my-products" className='dropdown-content'>
+                My Products
+              </a>
+              <br />
               <a href="/create-product" onClick={handleShowCreateProduct} className='dropdown-content'>
                 Add Product
+              </a>
+              <br />
+              <a href="/invoice" className='dropdown-content'>
+                Invoice
               </a>
               <br />
               <a href="/" onClick={handleShowLogOut} className='dropdown-content'>
