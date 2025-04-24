@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage.jsx'
 import Login from './pages/LogIn.jsx'
 import Signup from './pages/SignUp.jsx'
+import Invoice from './pages/Invoice.jsx'
 import ProductPage from './pages/Product.jsx'
 import CreateProduct from './pages/CreateProduct.jsx'
 import SearchPage from './pages/SearchPage.jsx'
@@ -20,6 +21,8 @@ function App() {
         <Route path="/#" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/Profile" element={<UserProfile />} />
+        <Route path="/Invoice" element ={<Invoice />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product?id=:id" element={<ProductPage />} />
         <Route path="/create-product" element={<CreateProduct />} />
