@@ -1,0 +1,46 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  form p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="url"],
+  textarea {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    resize: vertical;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+
+.botton-cp{
+    background-color: #000;
+    border: #fff solid 2px;
+    border-radius: 0.25rem;;
+    color: white;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+}
+
+.botton-cp:hover {
+    background-color: #fff;
+    color: black;
+    transform: scale(1.3);
+}
