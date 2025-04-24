@@ -190,6 +190,10 @@ export function HeaderMenu() {
                 Add Product
               </a>
               <br />
+              <a href="/invoice" className='dropdown-content'>
+                Invoice
+              </a>
+              <br />
               <a href="/" onClick={handleShowLogOut} className='dropdown-content'>
                 Log Out
               </a>

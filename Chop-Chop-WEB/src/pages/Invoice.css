@@ -1,6 +1,6 @@
 .FACTURA {
     font-family: 'Arial', sans-serif; 
-    color: #999999;
+    color: #fff;
     font-size: 50px;
     font-weight: bold;
     position: absolute;
@@ -9,7 +9,7 @@
 }
 .invoice_data, .invoice_db, .seller, .buyer {
     font-family: 'Arial', sans-serif; 
-    color: #999999;
+    color: #fff;
     font-size: 20px;
     position: absolute;   
 }
@@ -41,7 +41,7 @@
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
-    color: #333;
+    color: #fff;
     display: grid;  
     position: absolute;    /* permet controlar la posició amb top i left/right */
     top: 550px;            /* distància des de dalt */
@@ -57,12 +57,12 @@
   
   .row.header {
     font-weight: bold;
-    color: #666;
+    color: #fff;
   }
 
 .total-row {
     font-weight: bold;
-    border-top: 2px solid #ccc;
+    border-top: 2px solid #fff;
     margin-top: 10px;
   }
   

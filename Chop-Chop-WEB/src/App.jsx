@@ -21,8 +21,8 @@ function App() {
         <Route path="/#" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/Profile" element={<UserProfile />} />
-        <Route path="/Invoice" element ={<Invoice />} />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route path="/invoice" element ={<Invoice />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product?id=:id" element={<ProductPage />} />
         <Route path="/create-product" element={<CreateProduct />} />
@@ -31,7 +31,6 @@ function App() {
         <Route path="*" element={<h1>404 Not Found</h1>} />
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
-        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </Router>
   )

@@ -8,21 +8,6 @@ const API_URL = 'https://fakestoreapi.com/products?limit=15';
 
 function HomePage() {
   const [products, setProducts] = useState([]);
-
-  const handleInvoice = () => {
-    window.location.href = '/Invoice'
-  };
-
-  const handleMenu = () => {
-    window.location.href = '/MenuModal'
-  };
-/*
-  const handleMenuClick = () => {
-    setIsModalOpen(true);  
-  };
-  const handleMenuModal = () => {  
-    setIsModalOpen(false);
-  }; */
   
   useEffect(() => {
     fetch(API_URL)

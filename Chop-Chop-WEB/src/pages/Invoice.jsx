@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react'
+import { HeaderMenu } from './components/HeaderMenu';
 import './Invoice.css'
 
 function Product_Invoice () {
     return (
         <> 
+        <HeaderMenu />
+
         <p className='FACTURA'>   
         COMMERCIAL INVOICE 
         </p>
@@ -19,12 +22,14 @@ function Product_Invoice () {
             dd/mm/yyyy <br/> 
             #00000
         </p>
+
         <p className='seller'>
             <strong>SELLER</strong><br/> 
             *company name* <br/> 
             *Address* <br/> 
             *company phone number* <br/> 
         </p>
+
         <p className='buyer'>
             <strong>BUYER</strong><br/> 
             *name* <br/> 
@@ -32,34 +37,35 @@ function Product_Invoice () {
             *phone number* <br/> 
         </p>
 
-        <div className="invoice-table">
+        <main className="invoice-table">
             <div className="row header">
-                <div>Qty</div>
-                <div>Description</div>
-                <div>Unit Price</div>
-                <div>Amount</div>
+                <p>Qunatity</p>
+                <p>Description</p>
+                <p>Unit Price</p>
+                <p>Amount</p>
             </div>
 
             <div className="row">
-                <div>2</div>
-                <div>Product A</div>
-                <div>$10.00</div>
-                <div>$20.00</div>
+                <p>2</p>
+                <p>Product A</p>
+                <p>$10.00</p>
+                <p>$20.00</p>
             </div>
 
             <div className="row">
-                <div>1</div>
-                <div>Product B</div>
-                <div>$15.00</div>
-                <div>$15.00</div>
+                <p>1</p>
+                <p>Product B</p>
+                <p>$15.00</p>
+                <p>$15.00</p>
             </div>
+
             <div className="row total-row">
-                <div></div> {/* columna buida */}
-                <div></div> {/* columna buida */}
-                <div>Total</div>
-                <div>€35.00</div>
+                <p></p> {/* columna buida */}
+                <p></p> {/* columna buida */}
+                <p>Total</p>
+                <p>€35.00</p>
             </div>
-            </div>
+            </main>
         </>
     ); 
     
