@@ -11,6 +11,7 @@ import CreateProduct from './pages/CreateProduct.jsx'
 import SearchPage from './pages/SearchPage.jsx'
 import EditProfileModal from './pages/EditProfileModal.jsx'
 import UserProfile from './pages/Profile.jsx'
+import OwnedProducts from './pages/OwnedProducts.jsx'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="*" element={<h1>404 Not Found</h1>} />
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
+        <Route path="/ownedProducts" element={<OwnedProducts />} />
       </Routes>
     </Router>
   )

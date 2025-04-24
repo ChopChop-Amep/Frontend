@@ -26,7 +26,7 @@ function ProductPage() {
   const [price , setPrice] = useState(0);
 
   const productId = new URLSearchParams(window.location.search).get("id");
-  const API_URL = `https://fakestoreapi.com/products/${productId}`;
+  const API_URL = `https://fakestoreapi.com/products/${productId}`
 
   useEffect(() => {
     fetch(API_URL)
