@@ -15,7 +15,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 40px;
   background-color: #fff;
   border: 3px solid #ccc;
@@ -72,27 +72,3 @@
   color: gold;
 }
 
-/* Button Styles */
-.product-card .button-style-hp {
-    /*Localicamos el boton en la parte mas baja de la card*/
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    /*Estilo del boton*/
-    background-color: #fff;
-    color: #000;
-    padding: 15px 30px;
-    border-radius: 10px;
-    border: 2px solid #000;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.product-card .button-style-hp:hover {
-    background-color: #000;
-    color: #fff;
-    border-color: #fff;
-    transition: 0.3s;
-}
