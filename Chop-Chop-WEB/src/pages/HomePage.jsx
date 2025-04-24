@@ -25,6 +25,21 @@ function HomePage() {
     window.location.href = '/Profile';
   };
 
+  const handleInvoice = () => {
+    window.location.href = '/Invoice'
+  };
+
+  const handleMenu = () => {
+    window.location.href = '/MenuModal'
+  };
+/*
+  const handleMenuClick = () => {
+    setIsModalOpen(true);  
+  };
+  const handleMenuModal = () => {  
+    setIsModalOpen(false);
+  }; */
+  
   useEffect(() => {
     // Funció per tancar el desplegable si es fa clic fora
     const handleClickOutside = (event) => {
@@ -32,7 +47,6 @@ function HomePage() {
         setIsDropdownOpen(false);
       }
     };
-
     // Afegir l'escoltador d'esdeveniments al document
     document.addEventListener('click', handleClickOutside);
 
@@ -68,6 +82,20 @@ function HomePage() {
           }}
         />
 
+        <img // menu 
+          src = "https://cdn-icons-png.flaticon.com/512/20/20569.png"
+          width = "25"
+          height = "25"
+          style={{
+            cursor: 'pointer',
+            position: 'fixed',
+            top: '16px',
+            left: '200px'
+          }}
+          onClick={handleMenu}
+          
+        /> 
+
         {/* Mostra el desplegable només si `isDropdownOpen` és true */}
         {isDropdownOpen && (
           <div
@@ -98,6 +126,10 @@ function HomePage() {
             <br />
             <a href="#" onClick={handleEditProfile} style={{ color: '#000', display: 'block', padding: '5px' }}>
               Profile
+            </a>
+            <br /> 
+            <a href="#" onClick={handleInvoice} style={{ color: '#000', display: 'block', padding: '5px' }}>
+              Commercial invoice
             </a>
           </div>
         )}
