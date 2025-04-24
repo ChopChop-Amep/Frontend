@@ -186,7 +186,7 @@ export function HeaderMenu() {
                 Profile
               </a>
               <br />
-              <a href="/my-products" className='dropdown-content'>
+              <a href="/myProducts" className='dropdown-content'>
                 My Products
               </a>
               <br />
