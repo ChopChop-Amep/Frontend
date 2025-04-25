@@ -41,7 +41,7 @@ function UserProfile() {
     setIsModalOpen(false);
   };
   const handleEditProduct = () => {
-    window.location.href = '/ownedProducts';
+    window.location.href = '/myProducts';
   };
   const handleAddProduct = () => {
     window.location.href = '/create-product';
