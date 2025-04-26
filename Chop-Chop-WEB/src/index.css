@@ -16,7 +16,7 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
-  src: url("../public/Fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  src: url("/Fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
 }
 
 a {
