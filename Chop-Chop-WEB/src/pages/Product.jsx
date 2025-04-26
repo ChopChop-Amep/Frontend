@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Product.css';
 import { HeaderMenu } from './components/HeaderMenu.jsx'
+import { Box } from './utiles/Box.jsx'
 import './components/BuyButton.css'
 
 function StarRating({ rating }) {
@@ -23,6 +24,7 @@ function StarRating({ rating }) {
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const [price , setPrice] = useState(0);
 
   const productId = new URLSearchParams(window.location.search).get("id");
@@ -38,6 +40,19 @@ function ProductPage() {
         console.error('Error:', error);
       });
   }, [API_URL]);
+
+  // fetch para los productos similares
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products?limit=5')
+      .then(response => response.json())
+      .then(data => {
+        const filteredProducts = data.filter(product => product.id !== parseInt(productId));
+        setSimilarProducts(filteredProducts.slice(0, 5))
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, [productId]);
 
   const handleBuyNow = (price) => {
     alert(`You have purchased this product for $${price.toFixed(2)}`);
@@ -87,6 +102,17 @@ function ProductPage() {
                 </svg>
             </span>
         </div>
+      </div>
+      <br />
+      {/* productos similares */}
+      <h2 style={{ fontSize: '30px' }}>Other Products</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center' }}>
+        {similarProducts.map((product) => (
+          <a href={`/product?id=${product.id}`} key={product.id}>
+            <Box title={product.title} image={product.image} key={product.id} />
+            <StarRating rating={product.rating?.rate || 0} />
+          </a>
+        ))}
       </div>
     </main>
   );

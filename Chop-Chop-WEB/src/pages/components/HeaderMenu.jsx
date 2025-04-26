@@ -84,7 +84,7 @@ export function HeaderMenu() {
 
       <img
         className='logo'
-        src='../../public/logo_processed.png'
+        src='/logo_processed.png'
         onClick={() => {
             window.location.href = '/';
             }}

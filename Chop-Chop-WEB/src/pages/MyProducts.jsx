@@ -1,5 +1,6 @@
 import React from "react"
 import { HeaderMenu } from './components/HeaderMenu.jsx'
+import { Box } from './utiles/Box.jsx'
 import './MyProducts.css'
 import './utiles/Authenticator.jsx'
 
@@ -26,6 +27,16 @@ export default function MyProducts() {
       <HeaderMenu />
       <h1>{decodedToken.user_metadata?.name || ''}'s products</h1>
       <p>This are your products.</p>
+
+      {/* Lista de mis productos */}
+      <div className="products-list">
+        {/* Aquí puedes mapear los productos y mostrarlos (modo lista????)*/}
+        {/* {products.map(product => (
+          <a href={`/myProducts?id=${products.id}`} key={products.id}>
+            <Box title={products.title} image={products.image} key={products.id} />
+          </a>
+        ))} */}
+      </div>
     </>
   )
 }
