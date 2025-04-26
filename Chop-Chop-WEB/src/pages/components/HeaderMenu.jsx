@@ -6,35 +6,9 @@ export function HeaderMenu() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para verificar si el usuario está logueado
   const dropdownRef = useRef(null);
-  const [decodedToken, setDecodedToken] = useState({}); // Estado para almacenar el token decodificado
 
-  // Desencriptar el token para ver la información que contiene
-  const decodeToken = (token) => {
-    try {
-      const base64Url = token.split('.')[1]; // Obtener la parte del payload
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
-      );
-      return JSON.parse(jsonPayload); // Retornar el payload como un objeto
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const decoded = decodeToken(token);
-      if (decoded) {
-        setDecodedToken(decoded); 
-      }
-    }
-  }, []);
+  const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
+  const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // Decodifica el token JWT
 
 // user_metadata: 
 //  email: "pablotutormoegle@gmail.com"

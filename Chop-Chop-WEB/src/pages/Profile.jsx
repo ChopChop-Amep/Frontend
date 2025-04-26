@@ -1,38 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './Profile.css'
 import EditProfileModal from './EditProfileModal';
 import { HeaderMenu } from './components/HeaderMenu.jsx';
 
 function UserProfile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [decodedToken, setDecodedToken] = useState({}); // Estado para almacenar el token decodificado
-
-  const decodeToken = (token) => {
-    try {
-      const base64Url = token.split('.')[1]; // Obtener la parte del payload
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
-      );
-      return JSON.parse(jsonPayload); // Retornar el payload como un objeto
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const decoded = decodeToken(token);
-      if (decoded) {
-        setDecodedToken(decoded); 
-      }
-    }
-  }, []);
+  
+  const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
+  const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // Decodifica el token JWT
   
   const handleEditClick = () => {
     setIsModalOpen(true);  

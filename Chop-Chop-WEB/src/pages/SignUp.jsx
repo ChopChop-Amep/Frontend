@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import './SignUp.css'
-import supabase from './Authenticator.jsx'
+import supabase from './utiles/Authenticator.jsx'
 
 function SignUp() {
   const [name, setName] = useState('');
