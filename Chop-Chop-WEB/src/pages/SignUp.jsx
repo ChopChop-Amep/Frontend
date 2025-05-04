@@ -86,6 +86,7 @@ function SignUp() {
             <option value="admin">Admin</option>
           </select>
           <br />
+          {/* Añadir modificaciones de lo que se pide segun el User Type escojido */}
           <br />
           <button className='button-style-su' type='submit'>Sign Up</button>
         </form>

@@ -82,14 +82,6 @@ export function HeaderMenu() {
         onKeyDown={handleSearch}
       />
 
-      <img
-        className='logo'
-        src='/logo_processed.png'
-        onClick={() => {
-          window.location.href = '/';
-        }}
-      />
-
       <select
       className="select-header"
       onChange={(e) => {
@@ -124,9 +116,17 @@ export function HeaderMenu() {
       <option value="videojocs">Videojocs</option>
       </select>
 
+      <img
+        className='logo'
+        src='/logo_processed.png'
+        onClick={() => {
+          window.location.href = '/';
+        }}
+      />
+
       {isLoggedIn && (
         <>
-          <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
+          <a style = {{color: '#000', position: 'fixed', top: '25px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
           <img
             src={decodedToken.user_metadata?.image || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
             alt="Image User"
@@ -140,17 +140,19 @@ export function HeaderMenu() {
             />
         </>
       )}
-      <img
-        src={'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
-        alt="Image User"
-        width="40"
-        height="40"
-        className='img-user'
-        onClick={(e) => {
-          e.stopPropagation();
-          DropDown();
-        }}
-      />
+      {!isLoggedIn && (
+        <img
+          src={'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
+          alt="Image User"
+          width="40"
+          height="40"
+          className='img-user'
+          onClick={(e) => {
+            e.stopPropagation();
+            DropDown();
+          }}
+        />
+      )}
 
       {isDropdownOpen && (
         <div
