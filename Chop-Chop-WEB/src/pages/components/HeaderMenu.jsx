@@ -8,7 +8,6 @@ export function HeaderMenu() {
   const dropdownRef = useRef(null);
 
   const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
-  console.log(token ? token : 'no token' )
   const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // Decodifica el token JWT
 
 // user_metadata: 

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { Box } from './utiles/Box.jsx'
 import { HeaderMenu } from './components/HeaderMenu.jsx'
 
-const API_URL = 'https://fakestoreapi.com/products?limit=15'
+const API_URL = 'http://127.0.0.1:8000/products?page=0&min_price=0'
 
 function HomePage() {
   const [products, setProducts] = useState([]);
