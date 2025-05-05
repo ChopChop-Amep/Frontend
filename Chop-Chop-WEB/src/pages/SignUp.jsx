@@ -56,6 +56,11 @@ function SignUp() {
     }
   }
 
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   return (
     <main>
         <h1>Sign Up</h1>
@@ -66,7 +71,12 @@ function SignUp() {
           <br />
           <input onChange={(e) => setEmail(e.target.value)} value={email} className="input-su" type="text" placeholder="Email" />
           <br />
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className="input-su" type="password" placeholder="Password" />
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <input onChange={(e) => setPassword(e.target.value)} value={password} className="input-su" type={showPassword ? 'text' : 'password'} placeholder="Password" style={{ flex: 1 }} />
+            <button type="button" onClick={toggleShowPassword} className="btn-show-su" style={{ marginLeft: '0.5rem' }}>
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
           <br />
           <select onChange={(e) => setType(e.target.value)} value={uType} className="select-su" placeholder="User Type">
             <option value="">Select User Type</option>
@@ -76,6 +86,7 @@ function SignUp() {
             <option value="admin">Admin</option>
           </select>
           <br />
+          {/* Añadir modificaciones de lo que se pide segun el User Type escojido */}
           <br />
           <button className='button-style-su' type='submit'>Sign Up</button>
         </form>

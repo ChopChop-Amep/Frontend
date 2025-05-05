@@ -56,6 +56,7 @@ function ProductPage() {
 
   const handleBuyNow = (price) => {
     alert(`You have purchased this product for $${price.toFixed(2)}`);
+    // Hacer que mande a la api quien a comprado el producto que producto y cuando lo ha comprado 
   }
 
   useEffect(() => {

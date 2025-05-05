@@ -83,14 +83,6 @@ export function HeaderMenu() {
         onKeyDown={handleSearch}
       />
 
-      <img
-        className='logo'
-        src='/logo_processed.png'
-        onClick={() => {
-            window.location.href = '/';
-        }}
-      />
-
       <select
       className="select-header"
       onChange={(e) => {
@@ -100,45 +92,68 @@ export function HeaderMenu() {
         }
       }}
       >
-        <option value="all">Category</option>
-        <option value="artesanal">Artesanal</option>
-        <option value="antiguitats">Antiguitats</option>
-        <option value="cosmetica">Cosmètica</option>
-        <option value="cuina">Cuina</option>
-        <option value="electrodomestics">Electrodomèstics</option>
-        <option value="electronica">Electrònica</option>
-        <option value="equipament_lab">Equipament de Laboratori</option>
-        <option value="esports">Esports</option>
-        <option value="ferramentes">Ferramentes</option>
-        <option value="infantil">Infantil</option>
-        <option value="instruments">Instruments</option>
-        <option value="jardineria">Jardineria</option>
-        <option value="jocs_de_taula">Jocs de Taula</option>
-        <option value="joies_complements_accessoris">Joies, Complements i Accessoris</option>
-        <option value="llibres">Llibres</option>
-        <option value="mascotes">Mascotes</option>
-        <option value="mobles">Mobles</option>
-        <option value="neteja">Neteja</option>
-        <option value="roba">Roba</option>
-        <option value="sabates">Sabates</option>
-        <option value="vehicles">Vehicles</option>
-        <option value="videojocs">Videojocs</option>
+      <option value="all">Category</option>
+      <option value="artesanal">Artesanal</option>
+      <option value="antiguitats">Antiguitats</option>
+      <option value="cosmetica">Cosmètica</option>
+      <option value="cuina">Cuina</option>
+      <option value="electrodomestics">Electrodomèstics</option>
+      <option value="electronica">Electrònica</option>
+      <option value="equipament_lab">Equipament de Laboratori</option>
+      <option value="esports">Esports</option>
+      <option value="ferramentes">Ferramentes</option>
+      <option value="infantil">Infantil</option>
+      <option value="instruments">Instruments</option>
+      <option value="jardineria">Jardineria</option>
+      <option value="jocs_de_taula">Jocs de Taula</option>
+      <option value="joies_complements_accessoris">Joies, Complements i Accessoris</option>
+      <option value="llibres">Llibres</option>
+      <option value="mascotes">Mascotes</option>
+      <option value="mobles">Mobles</option>
+      <option value="neteja">Neteja</option>
+      <option value="roba">Roba</option>
+      <option value="sabates">Sabates</option>
+      <option value="vehicles">Vehicles</option>
+      <option value="videojocs">Videojocs</option>
       </select>
 
-      {isLoggedIn && (
-        <a style = {{color: '#000', position: 'fixed', top: '18px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
-      )}
       <img
-        src={(decodedToken ? decodedToken.user_metadata?.image : 'https://cdn-icons-png.flaticon.com/512/149/149071.png')}
-        alt="Imatge User"
-        width="40"
-        height="40"
-        className='img-user'
-        onClick={(e) => {
-          e.stopPropagation();
-          DropDown();
+        className='logo'
+        src='/logo_processed.png'
+        onClick={() => {
+          window.location.href = '/';
         }}
       />
+
+      {isLoggedIn && (
+        <>
+          <a style = {{color: '#000', position: 'fixed', top: '25px', right: '70px'}}> {decodedToken.user_metadata.name} </a>
+          <img
+            src={decodedToken.user_metadata?.image || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
+            alt="Image User"
+            width="40"
+            height="40"
+            className='img-user'
+            onClick={(e) => {
+              e.stopPropagation();
+              DropDown();
+            }}
+            />
+        </>
+      )}
+      {!isLoggedIn && (
+        <img
+          src={'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
+          alt="Image User"
+          width="40"
+          height="40"
+          className='img-user'
+          onClick={(e) => {
+            e.stopPropagation();
+            DropDown();
+          }}
+        />
+      )}
 
       {isDropdownOpen && (
         <div
