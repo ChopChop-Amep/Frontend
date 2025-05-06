@@ -28,7 +28,7 @@ function ProductPage() {
   const [price , setPrice] = useState(0);
 
   const productId = new URLSearchParams(window.location.search).get("id");
-  const API_URL = `https://fakestoreapi.com/products/${productId}`
+  const API_URL = `http://127.0.0.1:8000/product/${productId}`
 
   useEffect(() => {
     fetch(API_URL)
@@ -65,6 +65,7 @@ function ProductPage() {
     }
   }, [products]);
 
+
   return (
     <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <HeaderMenu />
@@ -77,10 +78,10 @@ function ProductPage() {
           <img
             className="product-image"
             src={product.image}
-            alt={product.title}
+            alt={product.name}
           />
           <div className="product-description">
-            <h3>{product.title}</h3>
+            <h3>{product.name}</h3>
             <p style={{ fontSize: '22px' }}>
               <strong>Price:</strong> ${product.price}
             </p>
@@ -111,7 +112,6 @@ function ProductPage() {
         {similarProducts.map((product) => (
           <a href={`/product?id=${product.id}`} key={product.id}>
             <Box title={product.title} image={product.image} key={product.id} />
-            <StarRating rating={product.rating?.rate || 0} />
           </a>
         ))}
       </div>

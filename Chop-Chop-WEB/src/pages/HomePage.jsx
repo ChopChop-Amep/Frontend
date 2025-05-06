@@ -18,14 +18,20 @@ function HomePage() {
       });
   }, []);
 
+  // example return products
+  // id: "66b5bfb9-5dda-4705-b9c8-e52bcff22d4c"
+  // image: "https://images.unsplash.com/photo-1705508216613-be1715a31212?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  // name: "Laptop Ultra Slim"
+  // price: 799.99
+
   return (
     <>
       <HeaderMenu />
       <br />
-      <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
+      <main style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
         {products && products.map((product) => (
           <a href={`/product?id=${product.id}`} key={product.id}>
-            <Box title={product.title} image={product.image} />
+            <Box title={product.name} image={product.image} />
           </a>
         ))}
       </main>
