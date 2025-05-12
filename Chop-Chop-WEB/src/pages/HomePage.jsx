@@ -3,6 +3,7 @@ import './HomePage.css'
 import { useEffect, useState } from 'react'
 import { Box } from './utiles/Box.jsx'
 import { HeaderMenu } from './components/HeaderMenu.jsx'
+import Characteristics from './components/Characteristics.jsx'
 
 const API_URL = 'https://fakestoreapi.com/products?limit=15'
 
@@ -21,6 +22,7 @@ function HomePage() {
   return (
     <>
       <HeaderMenu />
+      <Characteristics /> 
       <br />
       <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
         {products && products.map((product) => (
@@ -30,6 +32,7 @@ function HomePage() {
         ))}
       </main>
     </>
+
   )
 }
 
