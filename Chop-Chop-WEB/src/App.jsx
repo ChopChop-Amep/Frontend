@@ -11,7 +11,8 @@ import CreateProduct from './pages/CreateProduct.jsx'
 import SearchPage from './pages/SearchPage.jsx'
 import EditProfileModal from './pages/EditProfileModal.jsx'
 import UserProfile from './pages/Profile.jsx'
-import OwnedProducts from './pages/OwnedProducts.jsx'
+import MyProducts from './pages/MyProducts.jsx'
+import Characteristics from './pages/components/Characteristics.jsx'
 
 function App() {
 
@@ -29,10 +30,17 @@ function App() {
         <Route path="/create-product" element={<CreateProduct />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search?query=:query" element={<SearchPage />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
-        <Route path="/ownedProducts" element={<OwnedProducts />} />
+        <Route path="/myProducts" element={<MyProducts />} />
+        <Route path="/Characteristics" element={<Characteristics />} />
+
+        <Route path="*" element={
+          <>
+            <h1>404 Not Found</h1>
+            <img src="https://media.tenor.com/xMRIPlS0GSgAAAAM/dffg.gif" alt="404 Not Found" style={{ width: '100%', height: 'auto' }} />
+          </>
+          } />
       </Routes>
     </Router>
   )
