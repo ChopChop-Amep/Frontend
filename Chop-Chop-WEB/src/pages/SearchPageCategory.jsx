@@ -3,9 +3,12 @@ import { HeaderMenu } from "./components/HeaderMenu.jsx"
 import { Box } from "./utiles/Box.jsx"
 import { useEffect, useState } from "react"
 
-function SearchPage() {
-    const query = new URLSearchParams(window.location.search).get("query");
-    const API_URL = 'http://127.0.0.1:8000/products?query=' + query
+export default function SearchPageCategory() {
+    console.log("SearchPageCategory")
+    const category = new URLSearchParams(window.location.search).get("category");
+    const API_URL = 'http://127.0.0.1:8000/products?category=' + category
+
+    console.log(category)
 
     const [products, setProducts] = useState([]);
       
@@ -13,12 +16,14 @@ function SearchPage() {
         fetch(API_URL)
         .then(response => response.json())
         .then(data => {
-            setProducts(Array.isArray(data) ? data : [data]); // Asegúrate de que siempre sea un array
+            setProducts(Array.isArray(data) ? data : [data]); 
         })
         .catch(error => {
             console.error('Error:', error);
         });
-    }, [API_URL]);
+    }, [API_URL])
+
+    console.log(products)
 
     return (
         <main>
@@ -41,5 +46,3 @@ function SearchPage() {
         </main>
     );
 }
-
-export default SearchPage
