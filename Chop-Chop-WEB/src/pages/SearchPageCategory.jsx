@@ -3,10 +3,9 @@ import { HeaderMenu } from "./components/HeaderMenu.jsx"
 import { Box } from "./utiles/Box.jsx"
 import { useEffect, useState } from "react"
 
-export default function SearchPageCategory() {
-    console.log("SearchPageCategory")
+function SearchPageCategory() {
     const category = new URLSearchParams(window.location.search).get("category");
-    const API_URL = 'http://127.0.0.1:8000/products?category=' + category
+    const API_URL = `http://127.0.0.1:8000/products?category=${category}`
 
     console.log(category)
 
@@ -14,12 +13,18 @@ export default function SearchPageCategory() {
       
     useEffect(() => {
         fetch(API_URL)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            setProducts(Array.isArray(data) ? data : [data]); 
+            setProducts(Array.isArray(data) ? data : [data]);
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error fetching products:', error);
+            setProducts([]); // Set products to an empty array on error
         });
     }, [API_URL])
 
@@ -46,3 +51,5 @@ export default function SearchPageCategory() {
         </main>
     );
 }
+
+export default SearchPageCategory

@@ -43,6 +43,8 @@ function ProductPage() {
 
   const API_URL_SIMILAR = `http://127.0.0.1:8000/products?category=${products[0]?.category}`
 
+  console.log(products[0])
+
   // fetch para los productos similares
   useEffect(() => {
     if (products.length > 0) {
