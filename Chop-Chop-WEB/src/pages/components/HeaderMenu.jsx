@@ -87,7 +87,7 @@ export function HeaderMenu() {
         onChange={(e) => {
           const selectedCategory = e.target.value;
           if (selectedCategory !== "all") {
-            window.location.href = `/search?category=${encodeURIComponent(selectedCategory)}`;
+            window.location.href = `/searchcategory?category=${encodeURIComponent(selectedCategory)}`;
           }
         }}
       >

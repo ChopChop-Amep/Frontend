@@ -31,13 +31,9 @@
 /* Product Image Styles */
 .product-card .product-image {
   flex: 1;
-  min-width: 350px;
-}
-
-.product-card .product-image img {
-  width: 100%;
+  min-width: 50px;
   max-width: 500px;
-  height: auto;
+  border-radius: 10px;
 }
 
 /* Product Description Styles */
