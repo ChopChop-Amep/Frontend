@@ -24,17 +24,27 @@ function HomePage() {
   // name: "Laptop Ultra Slim"
   // price: 799.99
 
+  // Selecciona 5 productos aleatorios y sin repeticiones
+  const getRandomProducts = (products, count) => {
+    const shuffled = [...products].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  const randomProducts = getRandomProducts(products, 5);
+
   return (
     <>
       <HeaderMenu />
       <br />
-      <main style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
-        {products && products.map((product) => (
+      <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
+        {randomProducts.map((product) => (
           <a href={`/product?id=${product.id}`} key={product.id}>
             <Box title={product.name} image={product.image} />
           </a>
         ))}
       </main>
+      <hr className='line' />
+      {/* Productos mejor valorados */}
     </>
   )
 }
