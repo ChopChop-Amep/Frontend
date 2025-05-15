@@ -1,21 +1,21 @@
-import React from 'react'
-import './HomePage.css'
-import { useEffect, useState } from 'react'
-import { Box } from './utiles/Box.jsx'
-import { HeaderMenu } from './components/HeaderMenu.jsx'
-import Characteristics from './components/Characteristics.jsx'
+import React from "react";
+import "./HomePage.css";
+import { useEffect, useState } from "react";
+import { Box } from "./utiles/Box.jsx";
+import { HeaderMenu } from "./components/HeaderMenu.jsx";
+import Characteristics from "./components/Characteristics.jsx";
 
-const API_URL = 'http://127.0.0.1:8000/products?page=0&min_price=0'
+const API_URL = "http://127.0.0.1:8000/products?page=0&min_price=0";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
-  
+
   useEffect(() => {
     fetch(API_URL)
-      .then(response => response.json())
-      .then(data => setProducts(data))
+      .then((response) => response.json())
+      .then((data) => setProducts(data))
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }, []);
 
@@ -36,20 +36,28 @@ function HomePage() {
   return (
     <>
       <HeaderMenu />
-      <Characteristics /> 
+      <Characteristics />
       <br />
-      <main style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
+      <main
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5, 1fr)",
+          gap: "1rem",
+          justifyContent: "center",
+          margin: "1rem auto",
+          maxWidth: "1200px",
+        }}
+      >
         {randomProducts.map((product) => (
           <a href={`/product?id=${product.id}`} key={product.id}>
             <Box title={product.name} image={product.image} />
           </a>
         ))}
       </main>
-      <hr className='line' />
+      <hr className="line" />
       {/* Productos mejor valorados */}
     </>
-
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
