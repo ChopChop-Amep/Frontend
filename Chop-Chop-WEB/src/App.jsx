@@ -12,6 +12,7 @@ import SearchPage from './pages/SearchPage.jsx'
 import EditProfileModal from './pages/EditProfileModal.jsx'
 import UserProfile from './pages/Profile.jsx'
 import MyProducts from './pages/MyProducts.jsx'
+import Characteristics from './pages/components/Characteristics.jsx'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
         <Route path="/myProducts" element={<MyProducts />} />
+        <Route path="/Characteristics" element={<Characteristics />} />
 
         <Route path="*" element={
           <>
