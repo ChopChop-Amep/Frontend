@@ -20,24 +20,20 @@
   background-color: #fff;
   border: 3px solid #ccc;
   border-radius: 20px;
+  color: #000;
   max-width: 90vw;
   min-height: 80vh;
   box-sizing: border-box;
-  margin-left: -5vw;
-  margin-right: auto;
+  margin-top: 70px;
   gap: 60px;
 }
 
 /* Product Image Styles */
 .product-card .product-image {
   flex: 1;
-  min-width: 350px;
-}
-
-.product-card .product-image img {
-  width: 100%;
+  min-width: 50px;
   max-width: 500px;
-  height: auto;
+  border-radius: 10px;
 }
 
 /* Product Description Styles */

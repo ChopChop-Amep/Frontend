@@ -1,11 +1,10 @@
-import React from "react"
 import { HeaderMenu } from "./components/HeaderMenu.jsx"
 import { Box } from "./utiles/Box.jsx"
 import { useEffect, useState } from "react"
 
-function SearchPage() {
-    const query = new URLSearchParams(window.location.search).get("query");
-    const API_URL = 'http://127.0.0.1:8000/products?query=' + query
+function SearchPageCategory() {
+    const category = new URLSearchParams(window.location.search).get("category");
+    const API_URL = `http://127.0.0.1:8000/products?category=${category}`
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -13,16 +12,22 @@ function SearchPage() {
     useEffect(() => {
         setLoading(true);
         fetch(API_URL)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             setProducts(Array.isArray(data) ? data : [data]);
             setLoading(false);
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error fetching products:', error);
+            setProducts([]);
             setLoading(false);
         });
-    }, [API_URL]);
+    }, [API_URL])
 
     return (
         <main>
@@ -30,7 +35,7 @@ function SearchPage() {
             <h1>Search Results</h1>
             {loading ? (
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-                    <div className="spinner" />
+                    <div className="spinner"></div>
                     <style>
                         {`
                         .spinner {
@@ -66,4 +71,4 @@ function SearchPage() {
     );
 }
 
-export default SearchPage
+export default SearchPageCategory

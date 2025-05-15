@@ -28,7 +28,7 @@ function ProductPage() {
   const [price , setPrice] = useState(0);
 
   const productId = new URLSearchParams(window.location.search).get("id");
-  const API_URL = `https://fakestoreapi.com/products/${productId}`
+  const API_URL = `http://127.0.0.1:8000/product/${productId}`
 
   useEffect(() => {
     fetch(API_URL)
@@ -41,21 +41,27 @@ function ProductPage() {
       });
   }, [API_URL]);
 
+  const API_URL_SIMILAR = `http://127.0.0.1:8000/products?category=${products[0]?.category}`
+
+  console.log(products[0])
+
   // fetch para los productos similares
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products?limit=5')
-      .then(response => response.json())
-      .then(data => {
-        const filteredProducts = data.filter(product => product.id !== parseInt(productId));
-        setSimilarProducts(filteredProducts.slice(0, 5))
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }, [productId]);
+    if (products.length > 0) {
+      fetch(API_URL_SIMILAR)
+        .then(response => response.json())
+        .then(data => {
+          setSimilarProducts(Array.isArray(data) ? data : [data]); // Asegúrate de que siempre sea un array
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  }, [products, API_URL_SIMILAR]);
 
   const handleBuyNow = (price) => {
     alert(`You have purchased this product for $${price.toFixed(2)}`);
+    // Hacer que mande a la api quien a comprado el producto que producto y cuando lo ha comprado 
   }
 
   useEffect(() => {
@@ -63,6 +69,7 @@ function ProductPage() {
       setPrice(products[0].price);
     }
   }, [products]);
+
 
   return (
     <main style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -76,10 +83,10 @@ function ProductPage() {
           <img
             className="product-image"
             src={product.image}
-            alt={product.title}
+            alt={product.name}
           />
           <div className="product-description">
-            <h3>{product.title}</h3>
+            <h3>{product.name}</h3>
             <p style={{ fontSize: '22px' }}>
               <strong>Price:</strong> ${product.price}
             </p>
@@ -107,12 +114,15 @@ function ProductPage() {
       {/* productos similares */}
       <h2 style={{ fontSize: '30px' }}>Other Products</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem', justifyContent: 'center' }}>
-        {similarProducts.map((product) => (
-          <a href={`/product?id=${product.id}`} key={product.id}>
-            <Box title={product.title} image={product.image} key={product.id} />
-            <StarRating rating={product.rating?.rate || 0} />
-          </a>
-        ))}
+        {similarProducts
+          .filter((product) => product.id !== products[0]?.id) // Filtrar productos similares que no sean el mismo
+          .map((product) => (
+            <div key={product.id}>
+              <a href={`/product?id=${product.id}`}>
+                <Box title={product.name} image={product.image} />
+              </a>
+            </div>
+          ))}
       </div>
     </main>
   );
