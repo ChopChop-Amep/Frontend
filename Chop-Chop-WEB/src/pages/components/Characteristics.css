@@ -1,11 +1,9 @@
-.dropdown-container {
-  margin-top: 100px; 
+.dropdown-container { 
   margin-left: -150px;
-  list-style: none;
-  padding: 0;
+  margin-top: -200px; /* Fija el contenedor más arriba */
   display: flex;
   flex-direction: row;
-  gap: 200px; 
+  gap: 100px; 
   justify-content: start;
   flex-wrap: wrap;
   width: 100%;
