@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
-import { useEffect, useState } from "react";
 import { Box } from "./utiles/Box.jsx";
 import { HeaderMenu } from "./components/HeaderMenu.jsx";
 import Characteristics from "./components/Characteristics.jsx";
@@ -9,6 +8,7 @@ const API_URL = "http://127.0.0.1:8000/products?page=0&min_price=0";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(API_URL)
@@ -16,16 +16,10 @@ function HomePage() {
       .then((data) => setProducts(data))
       .catch((error) => {
         console.error("Error:", error);
-      });
+      })
+      .finally(() => setLoading(false));
   }, []);
 
-  // example return products
-  // id: "66b5bfb9-5dda-4705-b9c8-e52bcff22d4c"
-  // image: "https://images.unsplash.com/photo-1705508216613-be1715a31212?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  // name: "Laptop Ultra Slim"
-  // price: 799.99
-
-  // Selecciona 5 productos aleatorios y sin repeticiones
   const getRandomProducts = (products, count) => {
     const shuffled = [...products].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
@@ -38,22 +32,44 @@ function HomePage() {
       <HeaderMenu />
       <Characteristics />
       <br />
-      <main
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "1rem",
-          justifyContent: "center",
-          margin: "1rem auto",
-          maxWidth: "1200px",
-        }}
-      >
-        {randomProducts.map((product) => (
-          <a href={`/product?id=${product.id}`} key={product.id}>
-            <Box title={product.name} image={product.image} />
-          </a>
-        ))}
-      </main>
+      {loading ? (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+          <div className="spinner" />
+          <style>
+            {`
+              .spinner {
+                width: 48px;
+                height: 48px;
+                border: 6px solid #ccc;
+                border-top: 6px solid #0078d4;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+              }
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+            `}
+          </style>
+        </div>
+      ) : (
+        <main
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 1fr)",
+            gap: "1rem",
+            justifyContent: "center",
+            margin: "1rem auto",
+            maxWidth: "1200px",
+          }}
+        >
+          {randomProducts.map((product) => (
+            <a href={`/product?id=${product.id}`} key={product.id}>
+              <Box title={product.name} image={product.image} />
+            </a>
+          ))}
+        </main>
+      )}
       <hr className="line" />
       {/* Productos mejor valorados */}
     </>
