@@ -26,6 +26,8 @@ function ProductPage() {
   const [products, setProducts] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [price , setPrice] = useState(0);
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [selectedRating, setSelectedRating] = useState(0);
 
   const productId = new URLSearchParams(window.location.search).get("id");
   const API_URL = `http://127.0.0.1:8000/product/${productId}`
@@ -97,9 +99,48 @@ function ProductPage() {
               <strong>Description:</strong> {product.description}
             </p>
             <StarRating rating={product.rating?.rate || 0} />
+            <button  className="button-rating" onClick={()=> setShowRatingModal(true)}>Rate</button>
           </div>
         </div>
       ))}
+       
+      {showRatingModal && (
+        <div className="rating-modal-overlay" onClick={() => setShowRatingModal(false)}>
+          <div
+            className="rating-modal-content"
+            onClick={(e) => e.stopPropagation()} // Evita cerrar el modal al hacer clic dentro
+          >
+            <h3>Rate this Product</h3>
+            <div className="rating-stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  onClick={() => setSelectedRating(star)}
+                  className={star <= selectedRating ? 'selected' : ''}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            <button
+              className="button-rating"
+              onClick={() => {
+                alert(`You rated this product ${selectedRating} star(s).`);
+                setShowRatingModal(false);
+                setSelectedRating(0);
+              }}
+            >
+              Submit Rating
+            </button>
+            <br />
+            <button onClick={() => setShowRatingModal(false)} style={{ marginTop: '10px' }}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+
       <div data-tooltip={`Price: $${price}`} className="button" >
         <div className="button-wrapper" onClick={() => handleBuyNow(price)}>
             <div className="text" >Buy Now</div>
