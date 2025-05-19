@@ -95,3 +95,53 @@
   margin-top: 10px;
   text-align: center;
 }
+.button-rating {
+  margin-top: 20px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #ffd700;
+  color: rgb(7, 7, 7);
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.button-rating:hover {
+  background-color: #ffc107;
+}
+
+
+.rating-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+
+.rating-modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.rating-stars span {
+  font-size: 30px;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s;
+}
+
+.rating-stars span:hover,
+.rating-stars span.selected {
+  color: gold;
+}
