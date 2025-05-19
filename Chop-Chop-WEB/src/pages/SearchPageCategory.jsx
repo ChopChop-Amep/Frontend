@@ -1,5 +1,6 @@
 import { HeaderMenu } from "./components/HeaderMenu.jsx"
 import { Box } from "./utiles/Box.jsx"
+import LoadingAnimation from "./utiles/LoadingAnimation.jsx"
 import { useEffect, useState } from "react"
 
 function SearchPageCategory() {
@@ -34,25 +35,7 @@ function SearchPageCategory() {
             <HeaderMenu />
             <h1>Search Results</h1>
             {loading ? (
-                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-                    <div className="spinner"></div>
-                    <style>
-                        {`
-                        .spinner {
-                            width: 48px;
-                            height: 48px;
-                            border: 6px solid #ccc;
-                            border-top: 6px solid #0078d4;
-                            border-radius: 50%;
-                            animation: spin 1s linear infinite;
-                        }
-                        @keyframes spin {
-                            0% { transform: rotate(0deg); }
-                            100% { transform: rotate(360deg); }
-                        }
-                        `}
-                    </style>
-                </div>
+                <LoadingAnimation />
             ) : products.length > 0 ? (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '1rem', justifyContent: 'center', margin: '1rem auto', maxWidth: '1200px' }}>
                     {products.map((product) => (
