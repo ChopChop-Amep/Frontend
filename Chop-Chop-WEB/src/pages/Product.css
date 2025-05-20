@@ -100,12 +100,12 @@
   cursor: pointer;
   display: inline-block;
   background-color: #ffd700;
-  color: rgb(7, 7, 7);
+  border-color: 2px solid #000;
+  color: #000;
   font-weight: bold;
   padding: 10px 20px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  border: none;
 }
 
 .button-rating:hover {
