@@ -1,6 +1,5 @@
 # Frontend
 
-
 ## Technologies:
 
 <p align="center">
@@ -15,7 +14,6 @@ npm install
 npm install react-router-dom@6
 npm install @supabase/supabase-js
 ```
-
 
 ## Run in local
 
