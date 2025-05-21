@@ -57,13 +57,7 @@ function UserProfile() {
           @{decodedToken.user_metadata?.name || ''}{decodedToken.user_metadata?.surname || ''} · {decodedToken.user_metadata?.type || ''}
         </p>
         <p className='nom-info'>
-          Descripció/Categories/Filtres
-        </p> 
-        <p className='nom-location'>
-          Vilanova i la Geltrú, 08800, Barcelona, ES
-        </p> 
-        <p className='num-products'>
-          0 products
+          Email: {decodedToken.user_metadata?.email || ''}
         </p>
 
         <p className='Productes'> 
