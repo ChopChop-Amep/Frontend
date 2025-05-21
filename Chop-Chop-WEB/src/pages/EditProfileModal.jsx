@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './EditProfileModal.css'
+import { supabase } from './utiles/Authenticator.jsx'
 
 function EditProfileModal ({Close}) {
     const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
@@ -50,7 +51,13 @@ function EditProfileModal ({Close}) {
             alert('Error updating profile MAX');
         }
 
-
+        const { data: refreshedSession, error: refreshError } = await supabase.auth.refreshSession();
+        if (!refreshError && refreshedSession && refreshedSession.session) {
+            localStorage.setItem('authToken', refreshedSession.session.access_token);
+            window.location.reload();
+        } else if (refreshError) {
+            alert('Profile updated, but failed to refresh session. Please log out and log in again.');
+        }
     };
 
     return (
@@ -67,6 +74,7 @@ function EditProfileModal ({Close}) {
                         className='input-style-ep'
                         value={formData.name}
                         onChange={handleChange}
+                        required
                     />
                     {decodedToken.user_metadata?.type === 'professional' && (
                         <>
@@ -80,6 +88,7 @@ function EditProfileModal ({Close}) {
                                 className='input-style-ep'
                                 value={formData.surname}
                                 onChange={handleChange}
+                                required
                             />
                             <br />
                             <p className='header'>
@@ -91,20 +100,10 @@ function EditProfileModal ({Close}) {
                                 className='input-style-ep'
                                 value={formData.nif}
                                 onChange={handleChange}
+                                required
                             />
                         </>
                     )}
-                    <br />
-                    <p className='header'>
-                        Email:
-                    </p>
-                    <input
-                        type="email"
-                        name="email"
-                        className='input-style-ep'
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
                     <br />
                     <br />
                     <button className='button-style-ep-close' type="button" onClick={Close}> Close</button>
