@@ -39,6 +39,7 @@ function SignUp() {
               name: name,
               surname: surname,
               type: uType,
+              nif: uType === 'professional' || uType === 'enterprise' ? nif : null,
             },
           },
         });
@@ -61,6 +62,9 @@ function SignUp() {
     setShowPassword((prevState) => !prevState);
   };
 
+  const [nif, setNif] = useState('');
+  const [errorNif, setErrorNif] = useState('');
+
   return (
     <main>
         <h1>Sign Up</h1>
@@ -81,12 +85,25 @@ function SignUp() {
           <select onChange={(e) => setType(e.target.value)} value={uType} className="select-su" placeholder="User Type">
             <option value="">Select User Type</option>
             <option value="particular">Particular</option>
-            <option value="profesional">Profesional</option>
+            <option value="professional">Profesional</option>
             <option value="enterprise">Empresa</option>
-            <option value="admin">Admin</option>
           </select>
           <br />
           {/* Añadir modificaciones de lo que se pide segun el User Type escojido */}
+
+          {(uType === 'professional' || uType === 'enterprise') && (
+            <>
+              <input
+                onChange={(e) => setNif(e.target.value)}
+                value={nif}
+                className="input-su"
+                type="text"
+                placeholder="NIF"
+              />
+              <br />
+            </>
+          )}
+
           <br />
           <button className='button-style-su' type='submit'>Sign Up</button>
         </form>
@@ -95,6 +112,7 @@ function SignUp() {
             {errorE && <p style={{margin: '1rem', color: 'red'}}>{errorE}</p>}
             {errorP && <p style={{margin: '1rem', color: 'red'}}>{errorP}</p>}
             {errorT && <p style={{margin: '1rem', color: 'red'}}>{errorT}</p>}
+            {errorNif && <p style={{margin: '1rem', color: 'red'}}>{errorNif}</p>}
     </main>
   )
 }
