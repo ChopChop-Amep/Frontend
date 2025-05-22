@@ -4,3 +4,17 @@
     border-top: 2px solid #bbbbbb;
     margin: 2rem 0;
 }
+
+.products-shown{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+.container-home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18rem
+}

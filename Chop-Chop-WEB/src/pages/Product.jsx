@@ -179,11 +179,38 @@ function ProductPage() {
               className="button-rating"
               onClick={() => {
                 alert(`You rated this product ${selectedRating} star(s).`);
-                setShowRatingModal(false);
-                setSelectedRating(0);
+                {/*mandar la calificación al backend*/}
+                const token = localStorage.getItem("authToken");
+                fetch(`http://127.0.0.1:8000/rating`, {
+                  method: "POST",
+                  headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                  },
+                  body: JSON.stringify({
+                    owner_id: 1,
+                    product_id: products[0].id,
+                    value: selectedRating,
+                  }),
+                })
+                  .then((response) => {
+                    if (response.ok) {
+                      alert("Rating submitted successfully!");
+                    } else {
+                      alert("Failed to submit rating.");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  })
+                  .finally(() => {
+                    setShowRatingModal(false);
+                    setSelectedRating(0);
+                  });
               }}
             >
-              Submit Rating
+              Send Rating
             </button>
             <br />
             <button
