@@ -13,7 +13,7 @@ import SearchPageCategory from './pages/SearchPageCategory.jsx'
 import EditProfileModal from './pages/EditProfileModal.jsx'
 import UserProfile from './pages/Profile.jsx'
 import MyProducts from './pages/MyProducts.jsx'
-import Characteristics from './pages/components/Characteristics.jsx'
+import EditProduct from './pages/EditProduct.jsx'
 
 function App() {
 
@@ -29,6 +29,8 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product?id=:id" element={<ProductPage />} />
         <Route path="/create-product" element={<CreateProduct />} />
+        <Route path='/edit-product' element={<EditProduct />} />
+        <Route path='/edit-product/:id' element={<EditProduct />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search?query=:query" element={<SearchPage />} />
         <Route path="/searchcategory" element={<SearchPageCategory />} />
@@ -36,12 +38,12 @@ function App() {
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
         <Route path="/myProducts" element={<MyProducts />} />
-        <Route path="/Characteristics" element={<Characteristics />} />
 
         <Route path="*" element={
           <>
             <h1>404 Not Found</h1>
             <img src="https://media.tenor.com/xMRIPlS0GSgAAAAM/dffg.gif" alt="404 Not Found" style={{ width: '100%', height: 'auto' }} />
+            <a href="/">Click To Go Home</a>
           </>
           } />
       </Routes>
