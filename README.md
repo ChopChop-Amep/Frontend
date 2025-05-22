@@ -24,6 +24,6 @@ npm run dev
 
 ## APIs
 
-API for firsts tests and pseudo-real data: 
+API for firsts tests and pseudo-real data
 
 [Fake-Store-API](https://github.com/keikaavousi/fake-store-api)
