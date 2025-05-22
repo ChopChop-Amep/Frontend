@@ -76,10 +76,34 @@ function ProductPage() {
     }
   }, [products, API_URL_SIMILAR]);
 
-  const handleBuyNow = (price) => {
-    alert(`You have purchased this product for $${price.toFixed(2)}`);
-    // Hacer que mande a la api quien a comprado el producto que producto y cuando lo ha comprado
-    
+  const handleBuyNow = async (price) => {
+    if (!products[0]) return;
+    const token = localStorage.getItem("authToken"); 
+    try {
+      const response = await fetch("http://127.0.0.1:8000/purchase", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify([
+          {
+            product_id: products[0].id,
+            count: 1,
+            paid: products[0].price,
+          },
+        ]),
+      });
+      if (response.ok) {
+        alert(`You have purchased this product for $${price.toFixed(2)}`);
+      } else {
+        const errorData = await response.json();
+        alert("Purchase failed: " + (errorData.detail || response.statusText));
+      }
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
   };
 
   useEffect(() => {

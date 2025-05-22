@@ -34,8 +34,25 @@ function CreateProduct() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Submit logic here
-        console.log(formData);
+        const token = localStorage.getItem("authToken");
+        fetch("http://127.0.0.1:8000/product", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Product created successfully!");
+            } else {
+                alert("Failed to create product.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
     };
 
     return (
