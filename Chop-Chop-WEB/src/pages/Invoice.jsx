@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HeaderMenu } from './components/HeaderMenu';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { es } from 'date-fns/locale';
@@ -23,6 +23,31 @@ function Product_Invoice() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [modalInvoiceIndex, setModalInvoiceIndex] = useState(null);
+  const [invoices, setInvoices] = useState([]);
+
+  const API_URL = 'http://127.0.0.1:8000/purchase/my_purchases'
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    fetch(API_URL, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setInvoices(data);
+        } else {
+          console.error('Data is not an array:', data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching invoices:', error);
+      });
+  }, [API_URL]); // da error 422
+
+  console.log('Invoices:', invoices);
 
   const printSection = () => {
     const printContent = document.getElementById('printable-area');
@@ -43,8 +68,6 @@ function Product_Invoice() {
     printWindow.print();
     printWindow.close();
   };
-
-  const invoices = [1, 2, 3, 4, 5];
 
   return (
     <>

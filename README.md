@@ -15,6 +15,7 @@
 npm install
 npm install react-router-dom@6
 npm install @supabase/supabase-js
+npm install react-datepicker date-fns
 ```
 
 ## Run in local
