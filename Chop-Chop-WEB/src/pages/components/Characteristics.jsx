@@ -11,14 +11,13 @@ export default function Characteristics() {
     setOpen((prev) => prev.map((v, i) => (i === index ? !v : false)));
   };
 
-  const labels = ["Sattus", "Stars", "Sort by"];
+  const labels = ["Status", "Stars", "Sort by"];
 
   const checkboxOptions = {
-    Sattus: ["New", "Like New", "Used"],
-    Stars: ["★ Stars", "★★ Stars", "★★★ Stars", "★★★★ Stars", "★★★★★ Stars"],
+    Status: ["nou", "poc usat", "usat"],
+    Stars: ["1", "2", "3", "4", "5"],
     "Sort by": ["Price ascendent", "Price descendent"],
   };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -31,6 +30,24 @@ export default function Characteristics() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Redirigir cuando se selecciona una opción
+  useEffect(() => {
+    // Si hay alguna selección, redirige
+    const hasCheckboxes =
+      Object.values(selectedCheckboxes).some(arr => arr && arr.length > 0);
+    if (selectedOrder || hasCheckboxes) {
+      // Puedes personalizar la ruta y cómo pasas los datos seleccionados
+      const params = new URLSearchParams();
+      if (selectedOrder) params.append("order", selectedOrder);
+      Object.entries(selectedCheckboxes).forEach(([key, arr]) => {
+        if (arr && arr.length > 0) {
+          params.append(key, arr.join(","));
+        }
+      });
+      window.location.href = `/selected?${params.toString()}`;
+    }
+  }, [selectedOrder, selectedCheckboxes]);
 
   return (
     <div className="dropdown-container" ref={containerRef}>

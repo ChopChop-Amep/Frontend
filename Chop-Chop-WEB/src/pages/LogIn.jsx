@@ -53,10 +53,10 @@ function SignIn() {
     <main>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <input className="input-li" onChange={handleChangeEmail} value={email} type="text" placeholder="Email" />
+        <input className="input-li" onChange={handleChangeEmail} value={email} type="text" placeholder="Email" required/>
         <br />
         <div style={{ position: 'relative', display: 'inline-block' }}>
-          <input className="input-li" onChange={handleChangePassword} value={password} type={showPassword ? 'text' : 'password'} placeholder="Password" />
+          <input className="input-li" onChange={handleChangePassword} value={password} type={showPassword ? 'text' : 'password'} placeholder="Password" required/>
           <button type="button" onClick={toggleShowPassword} className="btn-show" >
             {showPassword ? 'Hide' : 'Show'}
           </button>

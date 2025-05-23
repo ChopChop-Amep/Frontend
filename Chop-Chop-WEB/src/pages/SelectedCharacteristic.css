@@ -1,0 +1,11 @@
+.container-selected-characteristic {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.price-shown {
+    font-size: 1.5rem;
+    font-weight: bold;
+}

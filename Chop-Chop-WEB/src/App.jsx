@@ -14,6 +14,7 @@ import EditProfileModal from './pages/EditProfileModal.jsx'
 import UserProfile from './pages/Profile.jsx'
 import MyProducts from './pages/MyProducts.jsx'
 import EditProduct from './pages/EditProduct.jsx'
+import SelectedCharacteristic from './pages/SelectedCharacteristic.jsx'
 
 function App() {
 
@@ -35,6 +36,8 @@ function App() {
         <Route path="/search?query=:query" element={<SearchPage />} />
         <Route path="/searchcategory" element={<SearchPageCategory />} />
         <Route path="/searchcategory?category=:category" element={<SearchPageCategory />} />
+        <Route path="/selected" element={<SelectedCharacteristic />} />
+        <Route path="/selected?order=:order" element={<SelectedCharacteristic />} />
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
         <Route path="/myProducts" element={<MyProducts />} />

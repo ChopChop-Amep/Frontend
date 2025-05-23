@@ -10,6 +10,8 @@ export function HeaderMenu() {
   const token = localStorage.getItem("authToken"); // Cambia 'authToken' por el nombre de tu token
   const decodedToken = token ? JSON.parse(atob(token.split(".")[1])) : null; // Decodifica el token JWT
 
+  //console.log(token)
+
   // user_metadata:
   //  email: "pablotutormoegle@gmail.com"
   //  email_verified: true

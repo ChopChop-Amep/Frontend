@@ -4,7 +4,7 @@ import LoadingAnimation from "./utiles/LoadingAnimation.jsx"
 import { useEffect, useState } from "react"
 
 function SearchPageCategory() {
-    const category = new URLSearchParams(window.location.search).get("category");
+    const category = new URLSearchParams(window.location.search).get("category")
     const API_URL = `http://127.0.0.1:8000/products?category=${category}`
 
     const [products, setProducts] = useState([]);

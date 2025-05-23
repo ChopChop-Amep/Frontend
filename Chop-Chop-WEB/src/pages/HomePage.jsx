@@ -23,7 +23,7 @@ function HomePage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const API_URL_POPULAR = "http://127.0.0.1:8000/products?page=0&rating=3&min_price=0"
+  const API_URL_POPULAR = "http://127.0.0.1:8000/products?page=0&rating=4&min_price=0"
 
   useEffect(() => {
     fetch(API_URL_POPULAR)
@@ -45,14 +45,14 @@ function HomePage() {
 
   return (
     <>
-      <HeaderMenu />
+      <HeaderMenu/>
       <ul className="container-home-page">
         <Characteristics />
         <br />
         {loading ? (
           <LoadingAnimation />
         ) : (
-          <span >
+          <span>
             <main className="products-shown">
               {randomProducts.map((product) => (
                 <div key={product.id}>
