@@ -88,6 +88,8 @@ function ProductPage() {
     }
   }, [products]);
 
+  
+
   return (
     <main
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -109,10 +111,28 @@ function ProductPage() {
             alt={product.name}
           />
           <div className="product-description">
-            <h3>{product.name}</h3>
+            <h3>{product.name}</h3> 
+            
             <p style={{ fontSize: "22px" }}>
-              <strong>Price:</strong> ${product.price}
-            </p>
+            <strong>Price:</strong>{" "}
+            {product.discount > 0 ? (
+              <>
+                <span style={{ textDecoration: "line-through", color: "grey" }}>
+                  ${product.price.toFixed(2)}
+                </span> {" "}
+                <span style={{ color: "red", fontWeight: "bold" }}>
+                  ${(
+                    product.price *
+                    (1 - product.discount / 100)
+                  ).toFixed(2)}
+                </span>{" "}
+                <span style={{ color: "green" }}>(-{product.discount}%)</span>
+              </>
+            ) : (
+              <>${product.price.toFixed(2)}</>
+            )}
+          </p>
+
             <p style={{ fontSize: "20px" }}>
               <strong>Category:</strong> {product.category}
             </p>
