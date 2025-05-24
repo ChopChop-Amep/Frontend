@@ -18,26 +18,22 @@
   justify-content: center;
   padding: 40px;
   background-color: #fff;
-  border: 3px solid #ccc;
+  border: 4px solid #a7a7a7;
   border-radius: 20px;
+  color: #000;
   max-width: 90vw;
   min-height: 80vh;
   box-sizing: border-box;
-  margin-left: -5vw;
-  margin-right: auto;
+  margin-top: 70px;
   gap: 60px;
 }
 
 /* Product Image Styles */
 .product-card .product-image {
   flex: 1;
-  min-width: 350px;
-}
-
-.product-card .product-image img {
-  width: 100%;
+  min-width: 50px;
   max-width: 500px;
-  height: auto;
+  border-radius: 10px;
 }
 
 /* Product Description Styles */
@@ -69,6 +65,83 @@
 }
 
 .star-rating span.gold {
-  color: gold;
+  color: rgb(180, 153, 4);
 }
 
+.similar-product-card {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1 1 calc(20% - 20px);
+  max-width: calc(20% - 20px);
+  min-width: 200px;
+}
+
+.similar-product-image {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+}
+
+.similar-product-description {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+.button-rating {
+  margin-top: 20px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #ffd700;
+  border-color: 2px solid #000;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.button-rating:hover {
+  background-color: #ffc107;
+}
+
+
+.rating-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+
+.rating-modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.rating-stars span {
+  font-size: 30px;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s;
+}
+
+.rating-stars span:hover,
+.rating-stars span.selected {
+  color: gold;
+}

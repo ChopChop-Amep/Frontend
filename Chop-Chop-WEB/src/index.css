@@ -5,8 +5,7 @@
   font-weight: 400;
   
   color-scheme: light dark;
-  color: #ffffff;
-  background-color: #000000;
+  background: radial-gradient(circle, #474747, #000000);
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,7 +15,7 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
-  src: url("../public/Fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
+  src: url("/Fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype");
 }
 
 a {
