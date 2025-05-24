@@ -1,26 +1,20 @@
 import { useState, useRef, useEffect } from "react";
-import {Range} from 'react-range';
 import "./Characteristics.css";
 
-const MIN = 0;
-const MAX = 100000;
-
 export default function Characteristics() {
-  const [open, setOpen] = useState([false, false, false, false]);
+  const [open, setOpen] = useState([false, false, false]);
   const [selectedOrder, setSelectedOrder] = useState("");
   const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
   const containerRef = useRef(null);
-  // Preu Rang 
-  const [priceRange, setPriceRange] = useState([MIN, MAX]);
 
   const toggle = (index) => {
     setOpen((prev) => prev.map((v, i) => (i === index ? !v : false)));
   };
 
-  const labels = ["Status", "Stars", "Sort by", "Price Range"];
+  const labels = ["Sattus", "Stars", "Sort by"];
 
   const checkboxOptions = {
-    Status: ["New", "Like New", "Used"],
+    Sattus: ["New", "Like New", "Used"],
     Stars: ["★ Stars", "★★ Stars", "★★★ Stars", "★★★★ Stars", "★★★★★ Stars"],
     "Sort by": ["Price ascendent", "Price descendent"],
   };
@@ -54,48 +48,7 @@ export default function Characteristics() {
           </a>
           {open[i] && (
             <div className="dropdown-content-CH">
-              {label === "Price Range" ? (
-                <div style={{ padding: "1rem" }}>
-                  <Range
-                    step={0.01}
-                    min={MIN}
-                    max={MAX}
-                    values={priceRange}
-                    onChange={(values) => setPriceRange(values)}
-                    renderTrack={({ props, children }) => (
-                      <div
-                        {...props}
-                        style={{
-                          ...props.style,
-                          height: "4px",
-                          width: "100%",
-                          backgroundColor: "#ccc",
-                          marginTop: "1rem",
-                        }}
-                      >
-                        {children}
-                      </div>
-                    )}
-                    renderThumb={({ props }) => (
-                      <div
-                        {...props}
-                        style={{
-                          ...props.style,
-                          height: "20px",
-                          width: "20px",
-                          borderRadius: "50%",
-                          backgroundColor: "black",
-                          cursor: "pointer",
-                        }}
-                      />
-                    )}
-                  />
-                  <div style={{ marginTop: "1rem", textAlign: "center" }}>
-                    {priceRange[0].toFixed(2)} EUR -{" "}
-                    {priceRange[1].toFixed(2)} EUR
-                  </div>
-                </div>
-              ) : label === "Sort by"
+              {label === "Sort by"
                 ? checkboxOptions[label].map((option, j) => (
                     <label
                       key={j}
@@ -158,7 +111,7 @@ export default function Characteristics() {
                       />{" "}
                       {option}
                     </label>
-                  ))} 
+                  ))}
             </div>
           )}
         </div>
