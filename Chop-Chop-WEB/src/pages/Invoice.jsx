@@ -25,7 +25,7 @@ function Product_Invoice() {
   const [modalInvoiceIndex, setModalInvoiceIndex] = useState(null);
   const [invoices, setInvoices] = useState([]);
 
-  const API_URL = 'http://127.0.0.1:8000/purchase/my_purchases'
+  const API_URL = 'http://127.0.0.1:8000/my/products?page=0'
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -45,7 +45,7 @@ function Product_Invoice() {
       .catch((error) => {
         console.error('Error fetching invoices:', error);
       });
-  }, [API_URL]); // da error 422
+  }, [API_URL]);
 
   console.log('Invoices:', invoices);
 

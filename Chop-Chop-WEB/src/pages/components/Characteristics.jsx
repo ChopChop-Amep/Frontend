@@ -3,7 +3,7 @@ import {Range} from 'react-range';
 import "./Characteristics.css";
 
 const MIN = 0;
-const MAX = 100000;
+const MAX = 10000;
 
 export default function Characteristics() {
   const [open, setOpen] = useState([false, false, false, false]);
@@ -37,13 +37,17 @@ export default function Characteristics() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Redirigir cuando se selecciona una opción
+  // Redirigir cuando se selecciona una opción o rango de precio
+  // Solo redirige al soltar el slider (on final change)
+  const [sliderActive, setSliderActive] = useState(false);
+
   useEffect(() => {
-    // Si hay alguna selección, redirige
+    if (!sliderActive) return;
     const hasCheckboxes =
       Object.values(selectedCheckboxes).some(arr => arr && arr.length > 0);
-    if (selectedOrder || hasCheckboxes) {
-      // Puedes personalizar la ruta y cómo pasas los datos seleccionados
+    const priceChanged = priceRange[0] !== MIN || priceRange[1] !== MAX;
+
+    if (selectedOrder || hasCheckboxes || priceChanged) {
       const params = new URLSearchParams();
       if (selectedOrder) params.append("order", selectedOrder);
       Object.entries(selectedCheckboxes).forEach(([key, arr]) => {
@@ -51,9 +55,45 @@ export default function Characteristics() {
           params.append(key, arr.join(","));
         }
       });
+      if (priceChanged) {
+        params.append("minPrice", priceRange[0]);
+        params.append("maxPrice", priceRange[1]);
+      }
       window.location.href = `/selected?${params.toString()}`;
     }
+    // Reset sliderActive after redirect
+    // eslint-disable-next-line
+  }, [sliderActive]);
+
+  // Redirige inmediatamente al cambiar checkboxes o sort
+  useEffect(() => {
+    if (sliderActive) return;
+    const hasCheckboxes =
+      Object.values(selectedCheckboxes).some(arr => arr && arr.length > 0);
+    const priceChanged = priceRange[0] !== MIN || priceRange[1] !== MAX;
+
+    if (selectedOrder || hasCheckboxes || priceChanged) {
+      const params = new URLSearchParams();
+      if (selectedOrder) params.append("order", selectedOrder);
+      Object.entries(selectedCheckboxes).forEach(([key, arr]) => {
+        if (arr && arr.length > 0) {
+          params.append(key, arr.join(","));
+        }
+      });
+      if (priceChanged) {
+        params.append("minPrice", priceRange[0]);
+        params.append("maxPrice", priceRange[1]);
+      }
+      window.location.href = `/selected?${params.toString()}`;
+    }
+    // eslint-disable-next-line
   }, [selectedOrder, selectedCheckboxes]);
+
+  // Cambia el sliderActive solo al soltar el slider
+  const handleSliderFinalChange = (values) => {
+    setPriceRange(values);
+    setSliderActive(true);
+  };
 
   return (
     <div className="dropdown-container" ref={containerRef}>
@@ -74,11 +114,12 @@ export default function Characteristics() {
               {label === "Price Range" ? (
                 <div style={{ padding: "1rem" }}>
                   <Range
-                    step={0.01}
+                    step={0.1}
                     min={MIN}
                     max={MAX}
                     values={priceRange}
                     onChange={(values) => setPriceRange(values)}
+                    onFinalChange={handleSliderFinalChange}
                     renderTrack={({ props, children }) => (
                       <div
                         {...props}

@@ -6,7 +6,11 @@ import "./SelectedCharacteristic.css"
 
 
 export default function SelectedCharacteristic() {
-    const searchParams = new URLSearchParams(window.location.search).get("Status") || new URLSearchParams(window.location.search).get("Stars") || new URLSearchParams(window.location.search).get("order")
+    const searchParams = new URLSearchParams(window.location.search).get("Status") || 
+                        new URLSearchParams(window.location.search).get("Stars") || 
+                        new URLSearchParams(window.location.search).get("order") || 
+                        new URLSearchParams(window.location.search).get("minPrice") ||
+                        new URLSearchParams(window.location.search).get("maxPrice")
 
     let API_URL = "";
     if (new URLSearchParams(window.location.search).has("Status")) {
@@ -15,6 +19,10 @@ export default function SelectedCharacteristic() {
         API_URL = `http://127.0.0.1:8000/products?page=0&rating=${searchParams}&min_price=0`;
     } else if (new URLSearchParams(window.location.search).has("order")) {
         API_URL = `http://127.0.0.1:8000/products?page=0&min_price=0`;
+    } else if (new URLSearchParams(window.location.search).has("minPrice") || new URLSearchParams(window.location.search).has("maxPrice")) {
+        const minPrice = new URLSearchParams(window.location.search).get("minPrice") || 0;
+        const maxPrice = new URLSearchParams(window.location.search).get("maxPrice") || 10000;
+        API_URL = `http://127.0.0.1:8000/products?page=0&min_price=${minPrice}&max_price=${maxPrice}`;
     }
 
     const [products, setProducts] = React.useState([]);
@@ -53,7 +61,7 @@ export default function SelectedCharacteristic() {
     return (
     <>
         <HeaderMenu />
-        <h1 style={{marginTop: "4rem"}}>Products as: {searchParams} </h1>
+        <h1 style={{marginTop: "5rem"}}>Products as: {searchParams} </h1>
         {loading ? (
             <LoadingAnimation />
         ) : filteredProducts.length > 0 ? (
@@ -67,6 +75,9 @@ export default function SelectedCharacteristic() {
                             <p style={{ color: "yellow" }}>★ {product.rating}</p>
                         )}
                         {new URLSearchParams(window.location.search).has("order") && (
+                            <p className='price-shown'>Price: ${product.price}</p>
+                        )}
+                        {new URLSearchParams(window.location.search).has("minPrice") && (
                             <p className='price-shown'>Price: ${product.price}</p>
                         )}
                     </div>
