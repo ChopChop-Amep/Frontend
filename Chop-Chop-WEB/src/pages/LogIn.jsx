@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useData } from '../hooks/useDataSignUp.js';
 import './LogIn.css';
-import supabase from './Authenticator.jsx';
+import supabase from './utiles/Authenticator.jsx';
 
 function SignIn() {
   const { email, updateEmail, errorE, password, updatePassword, errorP } = useData();

@@ -1,38 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './Profile.css'
 import EditProfileModal from './EditProfileModal';
 import { HeaderMenu } from './components/HeaderMenu.jsx';
 
 function UserProfile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [decodedToken, setDecodedToken] = useState({}); // Estado para almacenar el token decodificado
-
-  const decodeToken = (token) => {
-    try {
-      const base64Url = token.split('.')[1]; // Obtener la parte del payload
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
-      );
-      return JSON.parse(jsonPayload); // Retornar el payload como un objeto
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const decoded = decodeToken(token);
-      if (decoded) {
-        setDecodedToken(decoded); 
-      }
-    }
-  }, []);
+  
+  const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
+  const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // Decodifica el token JWT
   
   const handleEditClick = () => {
     setIsModalOpen(true);  
@@ -41,7 +16,7 @@ function UserProfile() {
     setIsModalOpen(false);
   };
   const handleEditProduct = () => {
-    window.location.href = '/ownedProducts';
+    window.location.href = '/myProducts';
   };
   const handleAddProduct = () => {
     window.location.href = '/create-product';
@@ -82,13 +57,7 @@ function UserProfile() {
           @{decodedToken.user_metadata?.name || ''}{decodedToken.user_metadata?.surname || ''} · {decodedToken.user_metadata?.type || ''}
         </p>
         <p className='nom-info'>
-          Descripció/Categories/Filtres
-        </p> 
-        <p className='nom-location'>
-          Vilanova i la Geltrú, 08800, Barcelona, ES
-        </p> 
-        <p className='num-products'>
-          0 products
+          Email: {decodedToken.user_metadata?.email || ''}
         </p>
 
         <p className='Productes'> 

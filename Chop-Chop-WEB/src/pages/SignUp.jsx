@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import './SignUp.css'
-import supabase from './Authenticator.jsx'
+import supabase from './utiles/Authenticator.jsx'
 
 function SignUp() {
   const [name, setName] = useState('');
@@ -39,6 +39,7 @@ function SignUp() {
               name: name,
               surname: surname,
               type: uType,
+              nif: uType === 'professional' || uType === 'enterprise' ? nif : null,
             },
           },
         });
@@ -56,6 +57,14 @@ function SignUp() {
     }
   }
 
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
+  const [nif, setNif] = useState('');
+  const [errorNif, setErrorNif] = useState('');
+
   return (
     <main>
         <h1>Sign Up</h1>
@@ -66,16 +75,35 @@ function SignUp() {
           <br />
           <input onChange={(e) => setEmail(e.target.value)} value={email} className="input-su" type="text" placeholder="Email" />
           <br />
-          <input onChange={(e) => setPassword(e.target.value)} value={password} className="input-su" type="password" placeholder="Password" />
+          <div style={{ position: 'relative', display: 'inline-block' }}>
+            <input onChange={(e) => setPassword(e.target.value)} value={password} className="input-su" type={showPassword ? 'text' : 'password'} placeholder="Password" style={{ flex: 1 }} />
+            <button type="button" onClick={toggleShowPassword} className="btn-show-su" style={{ marginLeft: '0.5rem' }}>
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
           <br />
           <select onChange={(e) => setType(e.target.value)} value={uType} className="select-su" placeholder="User Type">
             <option value="">Select User Type</option>
             <option value="particular">Particular</option>
-            <option value="profesional">Profesional</option>
+            <option value="professional">Profesional</option>
             <option value="enterprise">Empresa</option>
-            <option value="admin">Admin</option>
           </select>
           <br />
+          {/* Añadir modificaciones de lo que se pide segun el User Type escojido */}
+
+          {(uType === 'professional' || uType === 'enterprise') && (
+            <>
+              <input
+                onChange={(e) => setNif(e.target.value)}
+                value={nif}
+                className="input-su"
+                type="text"
+                placeholder="NIF"
+              />
+              <br />
+            </>
+          )}
+
           <br />
           <button className='button-style-su' type='submit'>Sign Up</button>
         </form>
@@ -84,6 +112,7 @@ function SignUp() {
             {errorE && <p style={{margin: '1rem', color: 'red'}}>{errorE}</p>}
             {errorP && <p style={{margin: '1rem', color: 'red'}}>{errorP}</p>}
             {errorT && <p style={{margin: '1rem', color: 'red'}}>{errorT}</p>}
+            {errorNif && <p style={{margin: '1rem', color: 'red'}}>{errorNif}</p>}
     </main>
   )
 }

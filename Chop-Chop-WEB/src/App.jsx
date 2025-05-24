@@ -9,6 +9,7 @@ import Invoice from './pages/Invoice.jsx'
 import ProductPage from './pages/Product.jsx'
 import CreateProduct from './pages/CreateProduct.jsx'
 import SearchPage from './pages/SearchPage.jsx'
+import SearchPageCategory from './pages/SearchPageCategory.jsx'
 import EditProfileModal from './pages/EditProfileModal.jsx'
 import UserProfile from './pages/Profile.jsx'
 import MyProducts from './pages/MyProducts.jsx'
@@ -30,6 +31,8 @@ function App() {
         <Route path="/create-product" element={<CreateProduct />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search?query=:query" element={<SearchPage />} />
+        <Route path="/searchcategory" element={<SearchPageCategory />} />
+        <Route path="/searchcategory?category=:category" element={<SearchPageCategory />} />
         <Route path="/edit-profile" element={<EditProfileModal />} />
         <Route path="/edit-profile/:id" element={<EditProfileModal />} />
         <Route path="/myProducts" element={<MyProducts />} />
