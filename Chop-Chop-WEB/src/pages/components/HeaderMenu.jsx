@@ -10,7 +10,7 @@ export function HeaderMenu() {
   const token = localStorage.getItem("authToken"); // Cambia 'authToken' por el nombre de tu token
   const decodedToken = token ? JSON.parse(atob(token.split(".")[1])) : null; // Decodifica el token JWT
 
-  console.log(token)
+  //console.log(token)
 
   // user_metadata:
   //  email: "pablotutormoegle@gmail.com"
@@ -52,6 +52,10 @@ export function HeaderMenu() {
       localStorage.removeItem("authToken"); // Eliminar el token de autenticación
       window.location.href = "/";
     }
+  };
+
+  const handleShowMyProduct = () => {
+    window.location.href = "/myProducts";
   };
 
   useEffect(() => {
@@ -200,7 +204,7 @@ export function HeaderMenu() {
                 Profile
               </a>
               <br />
-              <a href="/myProducts" className="dropdown-content">
+              <a href="/myProducts" className="dropdown-content" onClick={handleShowMyProduct}>
                 My Products
               </a>
               <br />

@@ -1,4 +1,4 @@
-import React from "react"
+import { useState, useEffect } from "react"
 import { HeaderMenu } from './components/HeaderMenu.jsx'
 import { Box } from './utiles/Box.jsx'
 import './MyProducts.css'
@@ -7,35 +7,40 @@ import './utiles/Authenticator.jsx'
 
 
 export default function MyProducts() {
-
-  const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
-  const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // Decodifica el token JWT
-
   //Llamada a la API para obtener los productos del usuario
-  // const [products, setProducts] = useState([])
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     const response = await fetch('http://localhost:8000/api/myproducts')
-  //     const data = await response.json()
-  //     setProducts(data)
-  //   }
-  //   fetchProducts()
-  // }, [])
+  const API_URL = 'http://127.0.0.1:8000/my/products?page=0'
+  const [products, setProducts] = useState([])
+  useEffect(() => {
+      const authToken = localStorage.getItem('authToken');
+      fetch(API_URL, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (Array.isArray(data)) {
+            setProducts(data);
+          } else {
+            console.error('Data is not an array:', data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching invoices:', error);
+        });
+    }, [API_URL]);
 
   return (
     <>
       <HeaderMenu />
-      <h1>{decodedToken.user_metadata?.name || ''}'s products</h1>
-      <p>This are your products.</p>
+      <h1>Your products</h1>
 
-      {/* Lista de mis productos */}
       <div className="products-list">
-        {/* Aquí puedes mapear los productos y mostrarlos (modo lista????)*/}
-        {/* {products.map(product => (
-          <a href={`/myProducts?id=${products.id}`} key={products.id}>
-            <Box title={products.title} image={products.image} key={products.id} />
+        {products.map(product => (
+          <a href={`/edit-product?id=${product.id}`} key={product.id}>
+            <Box title={product.name} image={product.image} key={product.id} />
           </a>
-        ))} */}
+        ))} 
       </div>
     </>
   )

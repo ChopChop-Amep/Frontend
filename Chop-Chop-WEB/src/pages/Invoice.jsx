@@ -25,7 +25,10 @@ function Product_Invoice() {
   const [modalInvoiceIndex, setModalInvoiceIndex] = useState(null);
   const [invoices, setInvoices] = useState([]);
 
-  const API_URL = 'http://127.0.0.1:8000/my/products?page=0'
+  const token = localStorage.getItem("authToken"); // Cambia 'authToken' por el nombre de tu token
+  const decodedToken = token ? JSON.parse(atob(token.split(".")[1])) : null; // Decodifica el token JWT
+
+  const API_URL = 'http://127.0.0.1:8000/my/purchases/'
 
   useEffect(() => {
     const authToken = localStorage.getItem('authToken');
@@ -47,7 +50,7 @@ function Product_Invoice() {
       });
   }, [API_URL]);
 
-  console.log('Invoices:', invoices);
+  //console.log('Invoices:', invoices);
 
   const printSection = () => {
     const printContent = document.getElementById('printable-area');
@@ -68,6 +71,9 @@ function Product_Invoice() {
     printWindow.print();
     printWindow.close();
   };
+
+  // Modal para mostrar detalles de la compra seleccionada
+  const selectedInvoice = modalInvoiceIndex !== null ? invoices[modalInvoiceIndex] : null;
 
   return (
     <>
@@ -97,67 +103,95 @@ function Product_Invoice() {
         )}
       </div>
 
-      <div className="invoice-grid">
-        {invoices.map((inv, index) => (
-          <div key={index} className="invoice-card" onClick={() => setModalInvoiceIndex(index)}>
-            <p className="factura-title">Factura {inv}</p>
-            <p>Número: #{inv}0000</p>
-            <p>Fecha: {selectedDate ? selectedDate.toLocaleDateString('es-ES') : 'dd/mm/yyyy'}</p>
-          </div>
-        ))}
+      <div className="invoice-list-container">
+        <ul className="invoice-list">
+          {invoices.map((inv, index) => (
+            <li
+              key={inv.id || index}
+              className='invoice-item'
+              onClick={() => setModalInvoiceIndex(index)}
+              tabIndex={0}
+              onKeyDown={e => {
+                if (e.key === 'Enter' || e.key === ' ') setModalInvoiceIndex(index);
+              }}
+            >
+              <span>Compra día: {inv.date ? new Date(inv.date).toLocaleDateString('es-ES') : 'dd/mm/yyyy'}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {modalInvoiceIndex !== null && (
+      {selectedInvoice && (
         <div className="invoice-modal-overlay" onClick={() => setModalInvoiceIndex(null)}>
           <div className="invoice-modal-content" onClick={(e) => e.stopPropagation()}>
             <section id="printable-area">
               <div className="invoice-header">
-                <div className="invoice-seller">
-                  <p><strong>SELLER</strong></p>
-                  <p>*company name*</p>
-                  <p>*Address*</p>
-                  <p>*Phone number*</p>
-                </div>
                 <div className="invoice-meta">
-                  <p>Invoice number: #{invoices[modalInvoiceIndex]}0000</p>
-                  <p>Invoice Date: {selectedDate ? selectedDate.toLocaleDateString('es-ES') : 'dd/mm/yyyy'}</p>
-                  <p>Order Nº: #{invoices[modalInvoiceIndex]}0000</p>
+                  <p>Invoice number: #{selectedInvoice.id || '0000'}</p>
+                  <p>Invoice Date: {selectedInvoice.date ? new Date(selectedInvoice.date).toLocaleDateString('es-ES') : 'dd/mm/yyyy'}</p>
+                  <p>Order Nº: #{selectedInvoice.id || '0000'}</p>
                 </div>
               </div>
 
               <div className="invoice-buyer">
                 <p><strong>BUYER</strong></p>
-                <p>*name*</p>
-                <p>*Address*</p>
-                <p>*Phone number*</p>
+                <p>{decodedToken.user_metadata.name} {decodedToken.user_metadata.surname}</p>
+                <p>{decodedToken.user_metadata.email}</p>
               </div>
 
               <table className="invoice-table">
                 <thead>
                   <tr>
                     <th>Quantity</th>
-                    <th>Description</th>
+                    <th>Product ID</th>
                     <th>Unit Price</th>
                     <th>Amount</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>2</td>
-                    <td>Product A</td>
-                    <td>$10.00</td>
-                    <td>$20.00</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Product B</td>
-                    <td>$15.00</td>
-                    <td>$15.00</td>
-                  </tr>
+                  {Array.isArray(selectedInvoice.items) ? (
+                    selectedInvoice.items.map((item, idx) => (
+                      <tr key={idx}>
+                        <td>{item.count}</td>
+                        <td>{item.product_id}</td>
+                        <td>
+                          {item.paid && item.count
+                            ? `$${(item.paid / item.count).toFixed(2)}`
+                            : item.paid}
+                        </td>
+                        <td>
+                          {item.paid
+                            ? `$${item.paid.toFixed(2)}`
+                            : item.paid}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td>{selectedInvoice.items.count}</td>
+                      <td>{selectedInvoice.items.product_id}</td>
+                      <td>
+                        {selectedInvoice.items.paid && selectedInvoice.items.count
+                          ? `$${(selectedInvoice.items.paid / selectedInvoice.items.count).toFixed(2)}`
+                          : selectedInvoice.items.paid}
+                      </td>
+                      <td>
+                        {selectedInvoice.items.paid
+                          ? `$${selectedInvoice.items.paid.toFixed(2)}`
+                          : selectedInvoice.items.paid}
+                      </td>
+                    </tr>
+                  )}
                   <tr className="total-row">
                     <td colSpan="2"></td>
                     <td>Total</td>
-                    <td>$35.00</td>
+                    <td>
+                      {Array.isArray(selectedInvoice.items)
+                        ? `$${selectedInvoice.items.reduce((sum, item) => sum + (item.paid || 0), 0).toFixed(2)}`
+                        : selectedInvoice.items.paid
+                        ? `$${selectedInvoice.items.paid.toFixed(2)}`
+                        : selectedInvoice.items.paid}
+                    </td>
                   </tr>
                 </tbody>
               </table>

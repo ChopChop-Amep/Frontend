@@ -31,7 +31,7 @@ function App() {
         <Route path="/product?id=:id" element={<ProductPage />} />
         <Route path="/create-product" element={<CreateProduct />} />
         <Route path='/edit-product' element={<EditProduct />} />
-        <Route path='/edit-product/:id' element={<EditProduct />} />
+        <Route path='/edit-product?id=:id' element={<EditProduct />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search?query=:query" element={<SearchPage />} />
         <Route path="/searchcategory" element={<SearchPageCategory />} />

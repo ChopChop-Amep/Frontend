@@ -1,4 +1,5 @@
 import React from "react"
+import { useEffect } from "react"
 import { HeaderMenu } from "./components/HeaderMenu.jsx"
 import "./EditProduct.css"
 
@@ -11,14 +12,45 @@ import "./EditProduct.css"
 
 function EditProduct() {
 
+    const productId = new URLSearchParams(window.location.search).get("id")
+    const API_URL = `http://127.0.0.1:8000/product/${productId}`
     const [form, setForm] = React.useState({
         name: "",
         description: "",
         price: "",
         image: "",
         stock: "",
-        category: "artesanal"
+        category: "artesanal",
+        condition: "nou"
     });
+
+    useEffect(() => {
+        const authToken = localStorage.getItem('authToken');
+        fetch(API_URL, {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    setForm({
+                        name: data.name,
+                        description: data.description,
+                        price: data.price,
+                        image: data.image,
+                        stock: data.stock,
+                        category: data.category,
+                        condition: data.condition
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching product data:', error);
+            });
+    }, [API_URL]);
+
+    console.log("Form data:", form);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,10 +60,32 @@ function EditProduct() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: Add update logic here (e.g., API call)
-        console.log("Updated product:", form);
+        const authToken = localStorage.getItem('authToken');
+        try {
+            const response = await fetch('http://127.0.0.1:8000/product', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({
+                    ...form,
+                    type: "verified",
+                    sku: productId
+                })
+            });
+            if (response.ok) {
+                alert('Product updated successfully!');
+            } else {
+                alert('Failed to update product.');
+            }
+        } catch (error) {
+            console.error('Error updating product:', error);
+            alert('Error updating product.');
+        }
     };
 
     return (

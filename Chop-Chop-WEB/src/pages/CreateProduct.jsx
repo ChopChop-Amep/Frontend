@@ -21,7 +21,8 @@ function CreateProduct() {
         stock: 0,
         price: 0,
         image: "",
-        category: "artesanal"
+        category: "artesanal",
+        condition: "nou"
     });
 
     const handleChange = (e) => {
@@ -31,6 +32,8 @@ function CreateProduct() {
             [name]: name === "stock" || name === "price" ? Number(value) : value
         }));
     };
+
+    console.log(formData);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -99,6 +102,14 @@ function CreateProduct() {
                     <option value="sabates">Sabates</option>
                     <option value="vehicles">Vehicles</option>
                     <option value="videojocs">Videojocs</option>
+                </select>
+                <p>Condition:</p>
+                <select id="condition" name="condition" className="input-style-cp" value={formData.condition} onChange={handleChange} required>
+                    <option value="nou">Nou</option>
+                    <option value="com_nou">Com nou</option>
+                    <option value="usat">Usat</option>
+                    <option value="amb_defectes">Amb defectes</option>
+                    <option value="per_recanvis">Per recanvis</option>
                 </select>
                 <br />
                 <br />

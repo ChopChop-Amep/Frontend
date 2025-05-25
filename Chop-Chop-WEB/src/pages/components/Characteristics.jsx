@@ -20,7 +20,7 @@ export default function Characteristics() {
   const labels = ["Status", "Stars", "Sort by", "Price Range"];
 
   const checkboxOptions = {
-    Status: ["nou", "poc usat", "usat"],
+    Status: ["nou", "com_nou", "usat", "amb_defectes", "per_recanvis"],
     Stars: ["1", "2", "3", "4", "5"],
     "Sort by": ["Price ascendent", "Price descendent"],
   };
