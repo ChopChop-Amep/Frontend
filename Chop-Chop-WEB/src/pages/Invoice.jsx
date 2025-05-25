@@ -25,9 +25,8 @@ function Product_Invoice() {
   const [modalInvoiceIndex, setModalInvoiceIndex] = useState(null);
   const [invoices, setInvoices] = useState([]);
 
-  const token = localStorage.getItem("authToken"); // Cambia 'authToken' por el nombre de tu token
-  const decodedToken = token ? JSON.parse(atob(token.split(".")[1])) : null; // Decodifica el token JWT
-
+  const token = localStorage.getItem("authToken"); 
+  const decodedToken = token ? JSON.parse(atob(token.split(".")[1])) : null; 
   const API_URL = 'http://127.0.0.1:8000/my/purchases/'
 
   useEffect(() => {
@@ -75,6 +74,43 @@ function Product_Invoice() {
   // Modal para mostrar detalles de la compra seleccionada
   const selectedInvoice = modalInvoiceIndex !== null ? invoices[modalInvoiceIndex] : null;
 
+  // Guardar todas las facturas originales para poder filtrar varias veces
+  const [allInvoices, setAllInvoices] = useState([]);
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    fetch(API_URL, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setInvoices(data);
+          setAllInvoices(data); // Guardar todas las facturas
+        } else {
+          console.error('Data is not an array:', data);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching invoices:', error);
+      });
+  }, [API_URL]);
+
+  const HandleDatePick = (date) => {
+    if (date) {
+      setSelectedDate(date);
+      setShowCalendar(false);
+      // Filtrar siempre desde todas las facturas originales
+      const filteredInvoices = allInvoices.filter(inv => {
+        const invoiceDate = new Date(inv.date);
+        return invoiceDate.toDateString() === date.toDateString();
+      });
+      setInvoices(filteredInvoices);
+    }
+  };
+
   return (
     <>
       <HeaderMenu />
@@ -92,6 +128,8 @@ function Product_Invoice() {
                 setSelectedDate(date);
                 setShowCalendar(false);
               }}
+              onSelect={HandleDatePick}
+              onClickOutside={() => setShowCalendar(false)}
               locale="es"
               inline
               showYearDropdown

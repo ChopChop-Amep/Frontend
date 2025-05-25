@@ -80,20 +80,13 @@ function ProductPage() {
     if (!products[0]) return;
     const token = localStorage.getItem("authToken"); 
     try {
-      const response = await fetch("http://127.0.0.1:8000/purchase", {
+      const response = await fetch(`http://127.0.0.1:8000/purchase/${products[0].id}`, {
         method: "POST",
         headers: {
           "accept": "application/json",
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify([
-          {
-            product_id: products[0].id,
-            count: 1,
-            paid: products[0].price,
-          },
-        ]),
+        }
       });
       if (response.ok) {
         alert(`You have purchased this product for $${price.toFixed(2)}`);
@@ -108,11 +101,47 @@ function ProductPage() {
 
   useEffect(() => {
     if (products.length > 0) {
-      setPrice(products[0].price);
+      const product = products[0];
+      const finalPrice = product.discount > 0
+        ? product.price * (1 - product.discount / 100)
+        : product.price;
+      setPrice(Number(finalPrice.toFixed(2)));
     }
   }, [products]);
 
-  
+  const handleRateProduct = () => {
+    if (!products[0]) return;
+    const token = localStorage.getItem("authToken");
+    fetch(`http://127.0.0.1:8000/rating`, {
+      method: "POST",
+      headers: {
+        "accept": "application/json",
+        "Content-Type": "application/json",
+        ...(token && { "Authorization": `Bearer ${token}` }),
+      },
+      body: JSON.stringify({
+        product_id: products[0].id,
+        value: selectedRating,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Rating submitted successfully!");
+        } else {
+          response.json().then((data) => {
+            alert("Failed to submit rating: " + (data.detail || response.statusText));
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error: " + error.message);
+      })
+      .finally(() => {
+        setShowRatingModal(false);
+        setSelectedRating(0);
+      });
+  };
 
   return (
     <main
@@ -163,6 +192,11 @@ function ProductPage() {
             <p style={{ fontSize: "18px" }}>
               <strong>Description:</strong> {product.description}
             </p>
+            {product.stock !== undefined && (
+              <p style={{ fontSize: "18px" }}>
+                <strong>Stock:</strong> {product.stock > 0 ? product.stock : "Out of Stock"}
+              </p>
+            )}
             <StarRating rating={product.rating || 0} />
             <button
               className="button-rating"
@@ -197,38 +231,7 @@ function ProductPage() {
             </div>
             <button
               className="button-rating"
-              onClick={() => {
-                alert(`You rated this product ${selectedRating} star(s).`);
-                {/*mandar la calificación al backend*/}
-                const token = localStorage.getItem("authToken");
-                fetch(`http://127.0.0.1:8000/rating`, {
-                  method: "POST",
-                  headers: {
-                    "accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`,
-                  },
-                  body: JSON.stringify({
-                    owner_id: 1,
-                    product_id: products[0].id,
-                    value: selectedRating,
-                  }),
-                })
-                  .then((response) => {
-                    if (response.ok) {
-                      alert("Rating submitted successfully!");
-                    } else {
-                      alert("Failed to submit rating.");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error("Error:", error);
-                  })
-                  .finally(() => {
-                    setShowRatingModal(false);
-                    setSelectedRating(0);
-                  });
-              }}
+              onClick={handleRateProduct}
             >
               Send Rating
             </button>

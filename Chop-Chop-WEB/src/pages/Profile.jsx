@@ -1,13 +1,36 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import './Profile.css'
 import EditProfileModal from './EditProfileModal';
 import { HeaderMenu } from './components/HeaderMenu.jsx';
+import { Box } from './utiles/Box.jsx';
 
 function UserProfile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   const token = localStorage.getItem('authToken'); // Cambia 'authToken' por el nombre de tu token
   const decodedToken = token ? JSON.parse(atob(token.split('.')[1])) : null; // Decodifica el token JWT
+
+  const API_URL = 'http://127.0.0.1:8000/my/products?page=0'
+    const [products, setProducts] = useState([])
+    useEffect(() => {
+        const authToken = localStorage.getItem('authToken');
+        fetch(API_URL, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (Array.isArray(data)) {
+              setProducts(data);
+            } else {
+              console.error('Data is not an array:', data);
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching invoices:', error);
+          });
+      }, [API_URL]);
   
   const handleEditClick = () => {
     setIsModalOpen(true);  
@@ -23,48 +46,57 @@ function UserProfile() {
   };
 
   return (
-      <>
-        <HeaderMenu />
-        <img
-          src={(decodedToken.user_metadata?.image) || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
-          alt="Imatge User"
-          className = "image1"
-          width="250"
-          height="250"
-        />
-        <div className="image-container"> 
-          <img 
-            src="https://cdn-icons-png.freepik.com/512/7527/7527819.png"
-            alt="Imatge Llapis"
-            className = "image2"
-            width="40"
-            height="40"
-            onClick={handleEditClick}
-          /> 
-        </div>
+    <>
+      <HeaderMenu />
+      <img
+        src={(decodedToken.user_metadata?.image) || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}
+        alt="Imatge User"
+        className="image1"
+        width="250"
+        height="250"
+      />
+      <div className="image-container">
         <img
           src="https://cdn-icons-png.freepik.com/512/7527/7527819.png"
           alt="Imatge Llapis"
-          className = "image3"
+          className="image2"
           width="40"
           height="40"
-          onClick={handleEditProduct}
-        /> 
-        <p className='nom-usuari-empresa'>
-          {decodedToken.user_metadata?.name || ''} {decodedToken.user_metadata?.surname || ''}
-        </p> 
-        <p className='nom-username'>
-          @{decodedToken.user_metadata?.name || ''}{decodedToken.user_metadata?.surname || ''} · {decodedToken.user_metadata?.type || ''}
-        </p>
-        <p className='nom-info'>
-          Email: {decodedToken.user_metadata?.email || ''}
-        </p>
+          onClick={handleEditClick}
+        />
+      </div>
+      <img
+        src="https://cdn-icons-png.freepik.com/512/7527/7527819.png"
+        alt="Imatge Llapis"
+        className="image3"
+        width="40"
+        height="40"
+        onClick={handleEditProduct}
+      />
+      <p className='nom-usuari-empresa'>
+        {decodedToken.user_metadata?.name || ''} {decodedToken.user_metadata?.surname || ''}
+      </p>
+      <p className='nom-username'>
+        @{decodedToken.user_metadata?.name || ''}{decodedToken.user_metadata?.surname || ''} · {decodedToken.user_metadata?.type || ''}
+      </p>
+      <p className='nom-info'>
+        Email: {decodedToken.user_metadata?.email || ''}
+      </p>
 
-        <p className='Productes'> 
-          Products
-        </p>
+      <p className='Productes'>
+        Products
+      </p>
+      {products.length > 0 ? (
+        <div className="product-list-profile">
+          {products.map(product => (
+            <a href={`/edit-product?id=${product.id}`} key={product.id}>
+              <Box title={product.name} image={product.image} key={product.id} />
+            </a>
+          ))}
+        </div>
+      ) : (
         <div className="container">
-          <img 
+          <img
             src="https://cdn-icons-png.flaticon.com/512/8212/8212741.png"
             alt="imatge plus"
             className="image4"
@@ -76,9 +108,10 @@ function UserProfile() {
             Add products
           </p>
         </div>
+      )}
 
-        {isModalOpen && <EditProfileModal Close={handleCloseModal}/>}
-      </>
+      {isModalOpen && <EditProfileModal Close={handleCloseModal} />}
+    </>
   );
 }
 

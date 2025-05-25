@@ -89,3 +89,11 @@
   font-size: 20px;
   margin-top: 40px; /* Espai entre la imatge i el text */
 }
+
+.product-list-profile {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 25rem;
+  margin-left: -30rem;
+}

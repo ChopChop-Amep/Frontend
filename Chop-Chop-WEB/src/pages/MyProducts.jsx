@@ -40,7 +40,7 @@ export default function MyProducts() {
           <a href={`/edit-product?id=${product.id}`} key={product.id}>
             <Box title={product.name} image={product.image} key={product.id} />
           </a>
-        ))} 
+        ))}
       </div>
     </>
   )

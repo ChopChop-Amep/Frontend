@@ -64,7 +64,7 @@ function EditProduct() {
         e.preventDefault();
         const authToken = localStorage.getItem('authToken');
         try {
-            const response = await fetch('http://127.0.0.1:8000/product', {
+            const response = await fetch(`http://127.0.0.1:8000/product/${productId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,6 +86,31 @@ function EditProduct() {
             console.error('Error updating product:', error);
             alert('Error updating product.');
         }
+    };
+
+    const handleDelete = async () => {
+        const authToken = localStorage.getItem('authToken');
+        if (window.confirm("Are you sure you want to delete this product?")) {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/product/${productId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                if (response.ok) {
+                    alert('Product deleted successfully!');
+                } else {
+                    alert('Failed to delete product.');
+                }
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('Error deleting product.');
+            }
+        }
+        window.location.href = '/myProducts'
     };
 
     return (
@@ -135,6 +160,8 @@ function EditProduct() {
                 <br />
                 <br />
                 <button className="botton-cp" type="submit">Update</button>
+                <br />
+                <button className="botton-cp" type="button" onClick={handleDelete}>Delete</button>
             </form>
         </>
     )

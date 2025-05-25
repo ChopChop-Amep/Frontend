@@ -10,19 +10,28 @@ import "./CreateProduct.css"
 //   "price": 0,
 //   "image": "string",
 //   "category": "artesanal"
+//  "condition": "nou"
+
+//   "type": "secondhand",
+//   "name": "string",
+//   "description": "string",
+//   "price": 0,
+//   "image": "string",
+//   "category": "artesanal"
+//   "condition": "nou"
 
 function CreateProduct() {
 
     const [formData, setFormData] = React.useState({
-        type: "verified",
+        type: "",
         sku: "",
         name: "",
         description: "",
         stock: 0,
         price: 0,
         image: "",
-        category: "artesanal",
-        condition: "nou"
+        category: "",
+        condition: ""
     });
 
     const handleChange = (e) => {
@@ -63,21 +72,104 @@ function CreateProduct() {
             <HeaderMenu />
             <br />
             <h1>Create Product</h1>
+            <div style={{ marginBottom: "1rem" }}>
+                <label>
+                    <input
+                        type="radio"
+                        name="type"
+                        value="verified"
+                        checked={formData.type === "verified"}
+                        onChange={handleChange}
+                    />
+                    Verified
+                </label>
+                <label style={{ marginLeft: "1rem" }}>
+                    <input
+                        type="radio"
+                        name="type"
+                        value="secondhand"
+                        checked={formData.type === "secondhand"}
+                        onChange={handleChange}
+                    />
+                    Secondhand
+                </label>
+            </div>
             <form onSubmit={handleSubmit}>
-                <p>SKU:</p>
-                <input type="text" id="sku" name="sku" className="input-style-cp" value={formData.sku} onChange={handleChange} required />
+                {formData.type === "verified" && (
+                    <>
+                        <p>SKU:</p>
+                        <input
+                            type="text"
+                            id="sku"
+                            name="sku"
+                            className="input-style-cp"
+                            value={formData.sku}
+                            onChange={handleChange}
+                            required
+                        />
+                        <p>Stock:</p>
+                        <input
+                            type="number"
+                            id="stock"
+                            name="stock"
+                            className="input-style-cp"
+                            value={formData.stock}
+                            onChange={handleChange}
+                            min="0"
+                            required
+                        />
+                    </>
+                )}
                 <p>Product Name:</p>
-                <input type="text" id="name" name="name" className="input-style-cp" value={formData.name} onChange={handleChange} required />
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="input-style-cp"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                />
                 <p>Product Description:</p>
-                <textarea id="description" name="description" className="input-style-cp" value={formData.description} onChange={handleChange} required />
-                <p>Stock:</p>
-                <input type="number" id="stock" name="stock" className="input-style-cp" value={formData.stock} onChange={handleChange} min="0" required />
+                <textarea
+                    id="description"
+                    name="description"
+                    className="input-style-cp"
+                    value={formData.description}
+                    onChange={handleChange}
+                    required
+                />
                 <p>Product Price:</p>
-                <input type="number" id="price" name="price" className="input-style-cp" value={formData.price} onChange={handleChange} min="0" step="0.01" required />
+                <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    className="input-style-cp"
+                    value={formData.price}
+                    onChange={handleChange}
+                    min="0"
+                    step="0.01"
+                    required
+                />
                 <p>Product Image (URL):</p>
-                <input type="url" id="image" name="image" className="input-style-cp" value={formData.image} onChange={handleChange} required />
+                <input
+                    type="url"
+                    id="image"
+                    name="image"
+                    className="input-style-cp"
+                    value={formData.image}
+                    onChange={handleChange}
+                    required
+                />
                 <p>Category:</p>
-                <select id="category" name="category" className="input-style-cp" value={formData.category} onChange={handleChange} required>
+                <select
+                    id="category"
+                    name="category"
+                    className="input-style-cp"
+                    value={formData.category}
+                    onChange={handleChange}
+                    required
+                >
                     <option value="artesanal">Artesanal</option>
                     <option value="antiguitats">Antiguitats</option>
                     <option value="cosmetica">Cosmètica</option>
@@ -103,17 +195,30 @@ function CreateProduct() {
                     <option value="vehicles">Vehicles</option>
                     <option value="videojocs">Videojocs</option>
                 </select>
-                <p>Condition:</p>
-                <select id="condition" name="condition" className="input-style-cp" value={formData.condition} onChange={handleChange} required>
-                    <option value="nou">Nou</option>
-                    <option value="com_nou">Com nou</option>
-                    <option value="usat">Usat</option>
-                    <option value="amb_defectes">Amb defectes</option>
-                    <option value="per_recanvis">Per recanvis</option>
-                </select>
+                {formData.type === "secondhand" && (
+                    <>
+                        <p>Condition:</p>
+                        <select
+                            id="condition"
+                            name="condition"
+                            className="input-style-cp"
+                            value={formData.condition}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="nou">Nou</option>
+                            <option value="com_nou">Com nou</option>
+                            <option value="usat">Usat</option>
+                            <option value="amb_defectes">Amb defectes</option>
+                            <option value="per_recanvis">Per recanvis</option>
+                        </select>
+                    </>
+                )}
                 <br />
                 <br />
-                <button className="button-style-cp" type="submit">Create Product</button>
+                <button className="button-style-cp" type="submit">
+                    Create Product
+                </button>
             </form>
         </>
     )
